@@ -16,6 +16,11 @@
 </p>
 
 <p align="center">
+  <a href="https://sivaprasad2003.github.io/rebirth-your-tv/"><img src="https://img.shields.io/badge/🌐_Official_Website-Visit_RebirthYourTV-06B6D4?style=for-the-badge&labelColor=0F172A" alt="Website"></a>
+  <a href="https://sivaprasad2003.github.io/rebirth-your-tv/#prompt"><img src="https://img.shields.io/badge/📋_1--Click_Prompt-Copy_Now-10B981?style=for-the-badge&labelColor=0F172A" alt="Prompt"></a>
+</p>
+
+<p align="center">
   <a href="README.zh-CN.md"><img src="https://img.shields.io/badge/README-%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-cfffcf?style=flat&labelColor=15181e" alt="简体中文"></a>
   <a href="README.vi.md"><img src="https://img.shields.io/badge/README-Ti%E1%BA%BFng%20Vi%E1%BB%87t-cfffcf?style=flat&labelColor=15181e" alt="Tiếng Việt"></a>
   <a href="README.ja.md"><img src="https://img.shields.io/badge/README-%E6%97%A5%E6%9C%AC%E8%AA%9E-cfffcf?style=flat&labelColor=15181e" alt="日本語"></a>
@@ -130,7 +135,8 @@ RebirthYourTV runs on all devices powered by **Android TV** or **Google TV** (An
 |---|---|
 | **Android TV / Google TV (Sony, Xiaomi, TCL, Hisense, Philips, OnePlus, Realme, Vu, etc.)** | **Full Support:** Debloater, 60 FPS Launcher, Screensaver, Remote Remap, and Backup. |
 | **Amazon Fire TV** | Debloat supported; Fire OS restricts custom home launchers. |
-| **Samsung (Tizen) / LG (webOS)** | Different operating systems; see [SHOWCASE.md](SHOWCASE.md) for webOS ports. |
+| **Samsung (Tizen)** | Not supported (no retail ADB shell; see [Samsung (Tizen)](docs/devices/samsung-tizen.md)) |
+| **LG (webOS)** | Different operating system; see [SHOWCASE.md](SHOWCASE.md) for webOS projects. |
 
 Tested lists from contributors, one folder per model in [`examples/`](examples/):
 
@@ -586,7 +592,8 @@ Contributions are welcome! If you have tested debloat lists for new TV models, s
 **Sivaprasad (`sivaprasad2003`)**  
 - **GitHub:** [@sivaprasad2003](https://github.com/sivaprasad2003)  
 - **Email:** [sivaprasad10072003@gmail.com](mailto:sivaprasad10072003@gmail.com)  
-- **Project Repository:** [https://github.com/sivaprasad2003/rebirth-your-tv](https://github.com/sivaprasad2003/rebirth-your-tv)
+- **Project Repository:** [https://github.com/sivaprasad2003/rebirth-your-tv](https://github.com/sivaprasad2003/rebirth-your-tv)  
+- **Live Website:** [https://sivaprasad2003.github.io/rebirth-your-tv](https://sivaprasad2003.github.io/rebirth-your-tv)
 
 ---
 
