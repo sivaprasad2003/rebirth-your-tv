@@ -310,6 +310,7 @@ function initBeforeAfterSlider() {
 
   function updateDimensions() {
     const boxWidth = box.offsetWidth;
+    box.style.setProperty("--box-width", `${boxWidth}px`);
     innerImg.style.width = `${boxWidth}px`;
   }
 

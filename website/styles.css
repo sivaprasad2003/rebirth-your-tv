@@ -89,6 +89,11 @@ body {
   z-index: 1;
 }
 
+/* Prevent sticky navbar from cutting off section headings */
+section, [id] {
+  scroll-margin-top: 96px;
+}
+
 /* ==========================================================================
    Navigation Bar
    ========================================================================== */
@@ -99,7 +104,7 @@ body {
   z-index: 100;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  background: rgba(6, 9, 15, 0.82);
+  background: rgba(6, 9, 15, 0.88);
   border-bottom: 1px solid var(--border-glass);
   transition: var(--transition);
 }
@@ -109,23 +114,26 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 74px;
+  gap: 16px;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   color: var(--text-primary);
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.5));
+  flex-shrink: 0;
 }
 
 .badge-onair {
@@ -140,6 +148,7 @@ body {
   text-transform: uppercase;
   padding: 2px 8px;
   border-radius: var(--radius-full);
+  white-space: nowrap;
 }
 
 .pulse-dot {
@@ -149,6 +158,7 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 8px var(--primary);
   animation: pulse-glow 2s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes pulse-glow {
@@ -159,16 +169,19 @@ body {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 16px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text-secondary);
-  font-size: 0.94rem;
+  font-size: 0.88rem;
   font-weight: 500;
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -178,7 +191,8 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================
@@ -850,7 +864,7 @@ body {
   top: 0;
   left: 0;
   height: 100%;
-  width: 980px;
+  width: var(--box-width, 980px);
   max-width: none;
   object-fit: cover;
 }
@@ -890,30 +904,38 @@ body {
 
 .tag-before {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  background: rgba(244, 63, 94, 0.85);
+  top: 18px;
+  left: 18px;
+  background: rgba(244, 63, 94, 0.9);
   color: #fff;
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   z-index: 5;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
 
 .tag-after {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(16, 185, 129, 0.85);
+  top: 18px;
+  right: 18px;
+  background: rgba(16, 185, 129, 0.9);
   color: #fff;
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   z-index: 5;
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
 }
 
 /* ==========================================================================
@@ -1520,10 +1542,58 @@ body {
 }
 
 /* Responsive Styles */
-@media (max-width: 868px) {
-  .nav-links { display: none; }
-  .dock-tiles-grid { grid-template-columns: repeat(3, 1fr); }
-  .settings-cards-preview { grid-template-columns: 1fr; }
-  .comparison-table th, .comparison-table td { padding: 12px 14px; font-size: 0.85rem; }
+@media (max-width: 1140px) {
+  .nav-links {
+    gap: 12px;
+  }
+  .nav-links a {
+    font-size: 0.82rem;
+  }
+  .badge-onair {
+    display: none;
+  }
+  .btn-sm {
+    padding: 7px 12px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .nav-links {
+    display: none;
+  }
+  .dock-tiles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .settings-cards-preview {
+    grid-template-columns: 1fr;
+  }
+  .comparison-table th, .comparison-table td {
+    padding: 12px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-actions .btn-github {
+    display: none;
+  }
+  .section-title {
+    font-size: 1.7rem;
+  }
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  .tag-before, .tag-after {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    top: 10px;
+  }
+  .tag-before { left: 10px; }
+  .tag-after { right: 10px; }
+  .slider-handle-pill {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
 }
 
