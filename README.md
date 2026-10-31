@@ -62,15 +62,10 @@ Smart TVs today ship with heavy, ad-ridden interfaces that degrade performance r
 | <img src="website/assets/screenshots/home.png" width="400" alt="RebirthYourTV 60 FPS Leanback Home Screen"> | <img src="website/assets/screenshots/screensaver.png" width="400" alt="RebirthYourTV Ambient Weather Screensaver"> |
 | *Clean dock with focus zoom, live Wi-Fi pill & custom wallpaper* | *OLED burn-in safe clock with live date, temperature & city name* |
 
-| ⚙️ Redesigned Glass Card Settings | 🕹️ Remote Button Remapper Menu |
+| ⚙️ Redesigned Glass Card Settings | 📱 Clean App Library Grid |
 |---|---|
-| <img src="website/assets/screenshots/settings.png" width="400" alt="Redesigned Leanback Settings"> | <img src="website/assets/screenshots/remote_buttons.png" width="400" alt="Remote Button Remapper Menu"> |
-| *6 modern TV categories with high-contrast emerald focus halos* | *Remap Netflix, Prime, JioHotstar, Sony LIV & Live TV buttons* |
-
-| 🎯 App Picker Target Selection | 📱 Clean App Library Grid |
-|---|---|
-| <img src="website/assets/screenshots/app_picker.png" width="400" alt="App Picker Dialog"> | <img src="website/assets/screenshots/grid.png" width="400" alt="All Apps Grid"> |
-| *Select any installed TV or sideloaded app for remote shortcuts* | *Full alphabetized app grid with instant search and zero ads* |
+| <img src="website/assets/screenshots/settings.png" width="400" alt="Redesigned Leanback Settings"> | <img src="website/assets/screenshots/grid.png" width="400" alt="All Apps Grid"> |
+| *6 modern TV categories with high-contrast emerald focus halos* | *Full alphabetized app grid with instant search and zero ads* |
 
 ---
 
@@ -142,11 +137,6 @@ TV_HOST=<YOUR_TV_IP> launcher/build-and-install.sh
 
 ### Step 5: Remap Remote Buttons & Configure
 Hold **OK** on the Settings icon on your new home screen to open **Launcher settings**:
-
-<p align="center">
-  <img src="website/assets/screenshots/remote_buttons.png" width="650" alt="Remote Button Remapper Interface">
-</p>
-
 - Go to **Remote Button Shortcuts** and pick which app each button launches (Netflix, Prime, Hotstar, Sony LIV, Live TV).
 - Set your preferred **Apps per row** (4, 5, 6, 7).
 - Pick your custom wallpaper and screensaver timeout.

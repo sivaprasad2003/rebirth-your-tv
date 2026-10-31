@@ -170,8 +170,6 @@ function initTvModes() {
     home: document.getElementById("screenHome"),
     screensaver: document.getElementById("screenScreensaver"),
     settings: document.getElementById("screenSettings"),
-    remote: document.getElementById("screenRemote"),
-    picker: document.getElementById("screenPicker"),
     grid: document.getElementById("screenGrid"),
     quick: document.getElementById("screenQuick")
   };
