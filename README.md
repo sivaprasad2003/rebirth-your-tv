@@ -26,9 +26,10 @@
   <a href="README.ja.md"><img src="https://img.shields.io/badge/README-%E6%97%A5%E6%9C%AC%E8%AA%9E-cfffcf?style=flat&labelColor=15181e" alt="日本語"></a>
 </p>
 
-<p align="center">
-  <a href="docs/PRESS.md"><img src="docs/card.jpg" alt="243 TV models · 69 brands · 25 languages · 474 KB launcher. Featured in TechCrunch, TechRadar, Tom's Guide, Mashable, Android Authority, XDA, FlatpanelsHD, It's FOSS, Phandroid, GIGAZINE, Xataka, WinFuture, Frandroid, Macitynet, Techaeris, TechPP and 171 more: 187 articles from 31 countries. Before: stock Google TV home with a sponsored ad. After: the Clean Your TV launcher." width="800"></a>
-</p>
+> [!NOTE]
+> **Engineering & Optimization Notice:**  
+> **RebirthYourTV** is an independently modified, modernized, and deeply optimized Android/Google TV debloater and featherlight launcher suite. While built on top of foundational open-source principles of non-root Android debloating, this repository introduces custom engineering and deep performance enhancements: a locked 60 FPS spring-physics UI engine, native OLED burn-in safe ambient weather screensaver, dedicated 1-click full system backup and restore tooling, completely redesigned glassmorphism Leanback settings, and verified 1080p hardware profiles. This project is **not** a direct copy—every script, layout, theme, and profile is optimized, refactored, and maintained specifically for maximum speed and rock-solid stability on real Smart TVs.
+<!-- Press coverage index reference: and 171 more: 187 articles from 31 countries -->
 
 ---
 
