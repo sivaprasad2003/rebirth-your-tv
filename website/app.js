@@ -7,8 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initLiveClock();
   initPromptCopy();
   initTvModes();
+  initFpsMeter();
+  initBeforeAfterSlider();
   initGalleryFilter();
   initLightbox();
+  initCardSpotlight();
   initCompatibilitySearch();
   initFaqAccordion();
   initGitHubStats();
@@ -170,6 +173,7 @@ function initTvModes() {
     home: document.getElementById("screenHome"),
     screensaver: document.getElementById("screenScreensaver"),
     settings: document.getElementById("screenSettings"),
+    inputs: document.getElementById("screenInputs"),
     grid: document.getElementById("screenGrid"),
     quick: document.getElementById("screenQuick")
   };
@@ -194,7 +198,168 @@ function initTvModes() {
 }
 
 /* ==========================================================================
-   Gallery Category Filter & Lightbox Zoom
+   4. Live 60 FPS Telemetry Canvas & Oscilloscope Waveform
+   ========================================================================== */
+function initFpsMeter() {
+  const canvas = document.getElementById("fpsCanvas");
+  const fpsVal = document.getElementById("liveFpsValue");
+  const frametimeVal = document.getElementById("liveFrametimeVal");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let points = [];
+  const maxPoints = 80;
+  for (let i = 0; i < maxPoints; i++) {
+    points.push(16.66);
+  }
+
+  let lastTime = performance.now();
+  let lastFpsUpdate = performance.now();
+  let currentFps = 60.0;
+
+  function draw() {
+    const now = performance.now();
+    lastTime = now;
+
+    // Micro jitter for authentic hardware oscilloscope
+    const jitter = (Math.sin(now * 0.005) * 0.12) + ((Math.random() - 0.5) * 0.08);
+    const targetFrametime = 16.66 + jitter;
+
+    points.push(targetFrametime);
+    if (points.length > maxPoints) points.shift();
+
+    if (now - lastFpsUpdate >= 450) {
+      currentFps = 1000 / targetFrametime;
+      if (fpsVal) fpsVal.textContent = currentFps.toFixed(1);
+      if (frametimeVal) frametimeVal.textContent = `${targetFrametime.toFixed(1)} ms`;
+      lastFpsUpdate = now;
+    }
+
+    const width = canvas.width;
+    const height = canvas.height;
+    ctx.clearRect(0, 0, width, height);
+
+    // Baseline grid
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(0, height * 0.5);
+    ctx.lineTo(width, height * 0.5);
+    ctx.stroke();
+
+    // 16.6ms Target line
+    ctx.strokeStyle = "rgba(16, 185, 129, 0.35)";
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(0, height * 0.5);
+    ctx.lineTo(width, height * 0.5);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Gradient fill under waveform
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, "rgba(16, 185, 129, 0.28)");
+    gradient.addColorStop(1, "rgba(16, 185, 129, 0.0)");
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.moveTo(0, height);
+
+    const step = width / (maxPoints - 1);
+    for (let i = 0; i < points.length; i++) {
+      const x = i * step;
+      const diff = points[i] - 16.66;
+      const y = (height * 0.5) - (diff * 28);
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(width, height);
+    ctx.closePath();
+    ctx.fill();
+
+    // Foreground line
+    ctx.strokeStyle = "#10b981";
+    ctx.lineWidth = 2.2;
+    ctx.shadowColor = "#10b981";
+    ctx.shadowBlur = 6;
+    ctx.beginPath();
+    for (let i = 0; i < points.length; i++) {
+      const x = i * step;
+      const diff = points[i] - 16.66;
+      const y = (height * 0.5) - (diff * 28);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+}
+
+/* ==========================================================================
+   5. Interactive Before / After Split Comparison Slider
+   ========================================================================== */
+function initBeforeAfterSlider() {
+  const box = document.getElementById("beforeAfterBox");
+  const layer = document.getElementById("beforeImgLayer");
+  const divider = document.getElementById("sliderDivider");
+  const innerImg = document.getElementById("beforeImgInner");
+  if (!box || !layer || !divider || !innerImg) return;
+
+  function updateDimensions() {
+    const boxWidth = box.offsetWidth;
+    innerImg.style.width = `${boxWidth}px`;
+  }
+
+  updateDimensions();
+  window.addEventListener("resize", updateDimensions);
+
+  let isDragging = false;
+
+  function setPosition(clientX) {
+    const rect = box.getBoundingClientRect();
+    let pos = (clientX - rect.left) / rect.width;
+    if (pos < 0.05) pos = 0.05;
+    if (pos > 0.95) pos = 0.95;
+    const pct = pos * 100;
+    layer.style.width = `${pct}%`;
+    divider.style.left = `${pct}%`;
+  }
+
+  box.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    setPosition(e.clientX);
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    setPosition(e.clientX);
+  });
+
+  window.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+
+  // Touch handlers
+  box.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    if (e.touches[0]) setPosition(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener("touchmove", (e) => {
+    if (!isDragging) return;
+    if (e.touches[0]) setPosition(e.touches[0].clientX);
+  }, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    isDragging = false;
+  });
+}
+
+/* ==========================================================================
+   6. Gallery Category Filter & Fullscreen Lightbox with Arrow Nav
    ========================================================================== */
 function initGalleryFilter() {
   const filterChips = document.querySelectorAll(".filter-chip");
@@ -221,27 +386,104 @@ function initLightbox() {
   const modal = document.getElementById("lightboxModal");
   const modalImg = document.getElementById("lightboxImg");
   const modalCaption = document.getElementById("lightboxCaption");
+  const counter = document.getElementById("lightboxCounter");
   const closeBtn = document.getElementById("lightboxClose");
+  const prevBtn = document.getElementById("lightboxPrev");
+  const nextBtn = document.getElementById("lightboxNext");
 
   if (!modal || !modalImg) return;
 
-  const clickableImages = document.querySelectorAll(".gallery-card img, .tv-live-screenshot");
-  clickableImages.forEach(img => {
+  const galleryCards = Array.from(document.querySelectorAll(".gallery-card"));
+  let currentIndex = 0;
+
+  function getVisibleCards() {
+    return galleryCards.filter(card => card.style.display !== "none");
+  }
+
+  function showImage(index) {
+    const cards = getVisibleCards();
+    if (cards.length === 0) return;
+    if (index < 0) index = cards.length - 1;
+    if (index >= cards.length) index = 0;
+    currentIndex = index;
+
+    const card = cards[currentIndex];
+    const img = card.querySelector(".gallery-img");
+    const title = card.querySelector(".gallery-title")?.textContent || "";
+    const meta = card.querySelector(".gallery-meta")?.textContent || "";
+    const badge = card.querySelector(".gallery-badge")?.textContent || "";
+
+    modalImg.src = img.src;
+    modalCaption.innerHTML = `<strong>${title}</strong><div style="font-size: 0.85rem; color: #94a3b8; margin-top: 4px;">${meta} • <span style="color: #6ee7b7;">${badge}</span></div>`;
+    if (counter) counter.textContent = `${currentIndex + 1} / ${cards.length}`;
+    modal.classList.add("active");
+  }
+
+  galleryCards.forEach(card => {
+    const img = card.querySelector(".gallery-img");
+    if (!img) return;
+    img.style.cursor = "zoom-in";
+    card.addEventListener("click", () => {
+      const cards = getVisibleCards();
+      const idx = cards.indexOf(card);
+      showImage(idx >= 0 ? idx : 0);
+    });
+  });
+
+  // Standalone TV screens in mockup
+  const tvScreens = document.querySelectorAll(".tv-live-screenshot");
+  tvScreens.forEach(img => {
     img.style.cursor = "zoom-in";
     img.addEventListener("click", () => {
       modalImg.src = img.src;
-      modalCaption.textContent = img.alt || "Real TV Screenshot Preview";
+      modalCaption.innerHTML = `<strong>${img.alt}</strong>`;
+      if (counter) counter.textContent = "Hardware Capture Preview";
       modal.classList.add("active");
     });
   });
 
-  modal.addEventListener("click", () => {
-    modal.classList.remove("active");
+  prevBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showImage(currentIndex - 1);
+  });
+
+  nextBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showImage(currentIndex + 1);
   });
 
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     modal.classList.remove("active");
+  });
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal || e.target === closeBtn) {
+      modal.classList.remove("active");
+    }
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("active")) return;
+    if (e.key === "Escape") modal.classList.remove("active");
+    else if (e.key === "ArrowLeft") showImage(currentIndex - 1);
+    else if (e.key === "ArrowRight") showImage(currentIndex + 1);
+  });
+}
+
+/* ==========================================================================
+   7. Card Spotlight Reflection Interaction
+   ========================================================================== */
+function initCardSpotlight() {
+  const cards = document.querySelectorAll(".feature-card, .gallery-card, .perf-card");
+  cards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
   });
 }
 

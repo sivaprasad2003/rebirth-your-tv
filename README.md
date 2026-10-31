@@ -67,6 +67,26 @@ Smart TVs today ship with heavy, ad-ridden interfaces that degrade performance r
 | <img src="website/assets/screenshots/settings.png" width="400" alt="Redesigned Leanback Settings"> | <img src="website/assets/screenshots/grid.png" width="400" alt="All Apps Grid"> |
 | *6 modern TV categories with high-contrast emerald focus halos* | *Full alphabetized app grid with instant search and zero ads* |
 
+| 🔌 HDMI & Source Inputs Menu | 📶 Top Bar Wi-Fi & Network Status |
+|---|---|
+| <img src="website/assets/screenshots/inputs_menu.png" width="400" alt="HDMI & Source Inputs Menu"> | <img src="website/assets/screenshots/wifi_status.png" width="400" alt="Top Bar Wi-Fi Status"> |
+| *Quick HDMI 1, HDMI 2, AV, and TV tuner input switching dialog* | *Real-time Wi-Fi connection & status indicator pill* |
+
+| ⚡ Quick Settings TV Panel | 🎯 60 FPS D-Pad Focus Zoom Interaction |
+|---|---|
+| <img src="website/assets/screenshots/quick_panel.png" width="400" alt="Quick Settings Panel"> | <img src="website/assets/screenshots/focus_youtube.png" width="400" alt="60 FPS Focus Zoom State"> |
+| *Instant TV brightness, picture mode, and audio sleep panel* | *Physics-based spring animation scaling focused apps to 1.08x* |
+
+| 🎛️ D-Pad Dock Focus Dynamics | 🛠️ Display & Sleep Timeout Controls |
+|---|---|
+| <img src="website/assets/screenshots/dock_focus.png" width="400" alt="D-Pad Dock Focus Dynamics"> | <img src="website/assets/screenshots/settings_controls.png" width="400" alt="Display & Sleep Controls"> |
+| *Dynamic spring centering with high-contrast outline on TV remote* | *Fine-tuning columns (4-7), sleep timer (10 mins) and overshoot* |
+
+| 🌙 Android TV Screensaver Menu | 🎧 Bluetooth Remotes & Audio Pairing |
+|---|---|
+| <img src="website/assets/screenshots/screensaver_settings.png" width="400" alt="Android TV Screensaver Menu"> | <img src="website/assets/screenshots/bluetooth_pairing.png" width="400" alt="Bluetooth Remotes & Audio Pairing"> |
+| *Native system DreamService integration for automatic sleep* | *Zero-friction pairing for wireless remotes, gamepads & audio* |
+
 ---
 
 ## 📊 Stock TV vs RebirthYourTV: Head-to-Head
