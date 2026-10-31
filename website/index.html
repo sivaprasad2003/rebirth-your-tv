@@ -136,32 +136,37 @@
           <!-- Screen Mode Tabs -->
           <div class="tv-mode-tabs">
             <button class="mode-tab active" data-mode="home">
-              <span>🏠</span> 60 FPS Leanback Home
+              <span>🏠</span> Home Dock
             </button>
             <button class="mode-tab" data-mode="screensaver">
-              <span>🌙</span> Ambient Weather Screensaver
+              <span>🌙</span> Weather Screensaver
             </button>
             <button class="mode-tab" data-mode="settings">
-              <span>⚙️</span> Glass Card Settings
+              <span>⚙️</span> Glass Settings
+            </button>
+            <button class="mode-tab" data-mode="remote">
+              <span>🕹️</span> Remote Remap
+            </button>
+            <button class="mode-tab" data-mode="picker">
+              <span>🎯</span> App Picker
             </button>
             <button class="mode-tab" data-mode="grid">
-              <span>📱</span> All Apps Library
+              <span>📱</span> Apps Grid
+            </button>
+            <button class="mode-tab" data-mode="quick">
+              <span>⚡</span> Quick Panel
             </button>
           </div>
 
           <!-- TV Frame -->
           <div class="tv-frame">
-            <!-- Screen 1: Real TV Home Screen Screenshot -->
             <img src="assets/screenshots/home.png" alt="RebirthYourTV 60 FPS Leanback Home Screen" class="tv-live-screenshot" id="screenHome">
-
-            <!-- Screen 2: Real TV Screensaver Screenshot -->
             <img src="assets/screenshots/screensaver.png" alt="RebirthYourTV Ambient Screensaver" class="tv-live-screenshot" id="screenScreensaver" style="display: none;">
-
-            <!-- Screen 3: Real TV Settings Screenshot -->
             <img src="assets/screenshots/settings.png" alt="RebirthYourTV Redesigned Leanback Settings" class="tv-live-screenshot" id="screenSettings" style="display: none;">
-
-            <!-- Screen 4: Real TV Apps Grid Screenshot -->
+            <img src="assets/screenshots/remote_buttons.png" alt="Remote Button Remapper Menu" class="tv-live-screenshot" id="screenRemote" style="display: none;">
+            <img src="assets/screenshots/app_picker.png" alt="Remote Remap Target App Selection" class="tv-live-screenshot" id="screenPicker" style="display: none;">
             <img src="assets/screenshots/grid.png" alt="RebirthYourTV All Apps Library Grid" class="tv-live-screenshot" id="screenGrid" style="display: none;">
+            <img src="assets/screenshots/quick_settings.png" alt="Quick Settings TV Panel" class="tv-live-screenshot" id="screenQuick" style="display: none;">
 
             <div class="tv-bezel-bottom">
               <div class="tv-power-led"></div>
@@ -178,57 +183,133 @@
       <div class="container">
         <div class="section-header">
           <span class="section-tag">HARDWARE VERIFICATION</span>
-          <h2 class="section-title">Captured Directly from Real TV Hardware</h2>
-          <p class="section-desc">100% authentic 1080p uncompressed captures taken directly over ADB during live performance testing.</p>
+          <h2 class="section-title">Latest Real TV Hardware Captures</h2>
+          <p class="section-desc">100% authentic uncompressed 1080p captures taken directly over ADB during live performance testing. Click any screenshot to view full resolution.</p>
+        </div>
+
+        <!-- Gallery Category Filter Tabs -->
+        <div class="gallery-filter-chips">
+          <button class="filter-chip active" data-filter="all">All Captures (8)</button>
+          <button class="filter-chip" data-filter="home">Home & Screensaver</button>
+          <button class="filter-chip" data-filter="settings">Settings & Layout</button>
+          <button class="filter-chip" data-filter="remap">Remote Remapper</button>
+          <button class="filter-chip" data-filter="library">App Library</button>
         </div>
 
         <div class="gallery-grid">
-          <div class="gallery-card">
+          <!-- Card 1: Home Dock -->
+          <div class="gallery-card" data-category="home">
             <div class="gallery-img-wrapper">
               <img src="assets/screenshots/home.png" alt="RebirthYourTV 60 FPS Leanback Home Screen" class="gallery-img" loading="lazy">
               <span class="gallery-badge">60 FPS Locked</span>
             </div>
             <div class="gallery-info">
+              <div class="gallery-meta">Xiaomi Mi TV 4A • Android 14</div>
               <h3 class="gallery-title">Featherlight Leanback Home</h3>
               <p class="gallery-desc">Custom wallpaper, favorite app dock with focus zoom, live Wi-Fi signal pill, zero ads.</p>
             </div>
           </div>
 
-          <div class="gallery-card">
+          <!-- Card 2: Screensaver -->
+          <div class="gallery-card" data-category="home">
             <div class="gallery-img-wrapper">
               <img src="assets/screenshots/screensaver.png" alt="RebirthYourTV Ambient Screensaver" class="gallery-img" loading="lazy">
               <span class="gallery-badge">Zero CPU Drain</span>
             </div>
             <div class="gallery-info">
+              <div class="gallery-meta">OLED Anti-Burn-in Protection</div>
               <h3 class="gallery-title">Ambient Weather Screensaver</h3>
-              <p class="gallery-desc">OLED burn-in safe drift clock with live date, day, temperature, weather condition, and city name.</p>
+              <p class="gallery-desc">Drift clock with live date, day, temperature, condition icon, and city name (28°C · Hyderabad).</p>
             </div>
           </div>
 
-          <div class="gallery-card">
+          <!-- Card 3: Settings Glass Cards -->
+          <div class="gallery-card" data-category="settings">
             <div class="gallery-img-wrapper">
               <img src="assets/screenshots/settings.png" alt="RebirthYourTV Redesigned Leanback Settings" class="gallery-img" loading="lazy">
               <span class="gallery-badge">Glassmorphism UI</span>
             </div>
             <div class="gallery-info">
+              <div class="gallery-meta">Leanback Card Layout</div>
               <h3 class="gallery-title">Redesigned Glass Card Settings</h3>
               <p class="gallery-desc">6 structured categories with emerald focus glow and instantaneous D-pad navigation.</p>
             </div>
           </div>
 
-          <div class="gallery-card">
+          <!-- Card 4: Remote Buttons Remap Menu -->
+          <div class="gallery-card" data-category="remap">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/remote_buttons.png" alt="Remote Button Remapper Menu" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Hardware Remapper</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">5 Dedicated Buttons</div>
+              <h3 class="gallery-title">Remote Button Shortcuts Menu</h3>
+              <p class="gallery-desc">Remap Netflix, Prime Video, JioHotstar, Sony LIV, and Live TV buttons directly on hardware.</p>
+            </div>
+          </div>
+
+          <!-- Card 5: Remote Button App Picker -->
+          <div class="gallery-card" data-category="remap">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/app_picker.png" alt="Target App Selection Dialog" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Interactive Picker</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">App & Source Mapping</div>
+              <h3 class="gallery-title">Target App Selection Dialog</h3>
+              <p class="gallery-desc">Select any installed app (YouTube, Plex, Kodi, Stremio) or HDMI source for your remote buttons.</p>
+            </div>
+          </div>
+
+          <!-- Card 6: Settings Detailed Controls -->
+          <div class="gallery-card" data-category="settings">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/settings_scroll.png" alt="Launcher Settings Display & Sleep Controls" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Fine Tuning</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Customization Controls</div>
+              <h3 class="gallery-title">Display, Motion & Sleep Controls</h3>
+              <p class="gallery-desc">Adjust columns (4-7), focus overshoot physics, screensaver timeout (10 mins), and wallpaper dimming.</p>
+            </div>
+          </div>
+
+          <!-- Card 7: Apps Grid -->
+          <div class="gallery-card" data-category="library">
             <div class="gallery-img-wrapper">
               <img src="assets/screenshots/grid.png" alt="RebirthYourTV All Apps Library Grid" class="gallery-img" loading="lazy">
               <span class="gallery-badge">Zero Bloat</span>
             </div>
             <div class="gallery-info">
+              <div class="gallery-meta">Clean App Library</div>
               <h3 class="gallery-title">Clean App Library Grid</h3>
               <p class="gallery-desc">Direct access to all installed sideloaded & TV apps with instant search and zero sponsored carousels.</p>
+            </div>
+          </div>
+
+          <!-- Card 8: Quick Settings Panel -->
+          <div class="gallery-card" data-category="settings">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/quick_settings.png" alt="Quick Settings TV Panel" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Instant Overlay</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Side Panel Overlay</div>
+              <h3 class="gallery-title">Quick Settings Panel Overlay</h3>
+              <p class="gallery-desc">Fast-access panel for Wi-Fi toggle, picture modes, audio settings, and TV sleep without leaving your app.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Fullscreen Image Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+      <span class="lightbox-close" id="lightboxClose">&times;</span>
+      <img src="" alt="Fullscreen Screenshot Preview" class="lightbox-img" id="lightboxImg">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
 
     <!-- The 1-Click AI Agent Prompt Section -->
     <section class="prompt-section" id="prompt">

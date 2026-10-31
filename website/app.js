@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initLiveClock();
   initPromptCopy();
   initTvModes();
+  initGalleryFilter();
+  initLightbox();
   initCompatibilitySearch();
   initFaqAccordion();
   initGitHubStats();
@@ -168,7 +170,10 @@ function initTvModes() {
     home: document.getElementById("screenHome"),
     screensaver: document.getElementById("screenScreensaver"),
     settings: document.getElementById("screenSettings"),
-    grid: document.getElementById("screenGrid")
+    remote: document.getElementById("screenRemote"),
+    picker: document.getElementById("screenPicker"),
+    grid: document.getElementById("screenGrid"),
+    quick: document.getElementById("screenQuick")
   };
 
   tabs.forEach(tab => {
@@ -187,6 +192,58 @@ function initTvModes() {
         }
       });
     });
+  });
+}
+
+/* ==========================================================================
+   Gallery Category Filter & Lightbox Zoom
+   ========================================================================== */
+function initGalleryFilter() {
+  const filterChips = document.querySelectorAll(".filter-chip");
+  const cards = document.querySelectorAll(".gallery-card");
+
+  filterChips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      filterChips.forEach(c => c.classList.remove("active"));
+      chip.classList.add("active");
+      const filter = chip.dataset.filter;
+
+      cards.forEach(card => {
+        if (filter === "all" || card.dataset.category === filter) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    });
+  });
+}
+
+function initLightbox() {
+  const modal = document.getElementById("lightboxModal");
+  const modalImg = document.getElementById("lightboxImg");
+  const modalCaption = document.getElementById("lightboxCaption");
+  const closeBtn = document.getElementById("lightboxClose");
+
+  if (!modal || !modalImg) return;
+
+  const clickableImages = document.querySelectorAll(".gallery-card img, .tv-live-screenshot");
+  clickableImages.forEach(img => {
+    img.style.cursor = "zoom-in";
+    img.addEventListener("click", () => {
+      modalImg.src = img.src;
+      modalCaption.textContent = img.alt || "Real TV Screenshot Preview";
+      modal.classList.add("active");
+    });
+  });
+
+  modal.addEventListener("click", () => {
+    modal.classList.remove("active");
+  });
+
+  closeBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    modal.classList.remove("active");
   });
 }
 
