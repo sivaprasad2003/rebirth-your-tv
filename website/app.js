@@ -167,7 +167,8 @@ function initTvModes() {
   const screens = {
     home: document.getElementById("screenHome"),
     screensaver: document.getElementById("screenScreensaver"),
-    settings: document.getElementById("screenSettings")
+    settings: document.getElementById("screenSettings"),
+    grid: document.getElementById("screenGrid")
   };
 
   tabs.forEach(tab => {
@@ -178,7 +179,7 @@ function initTvModes() {
       Object.entries(screens).forEach(([key, el]) => {
         if (!el) return;
         if (key === mode) {
-          el.style.display = "flex";
+          el.style.display = "block";
           el.style.opacity = "0";
           setTimeout(() => el.style.opacity = "1", 20);
         } else {
