@@ -457,6 +457,9 @@ Anker Nebula, BYINTEK, Epson, Formovie, Gadnic, JMGO, Portronics, Stellamore, Wa
 | [`tools/flamechart.py`](tools/flamechart.py) | Draws a before/after flame chart from those traces, for a pull request: one lane per thread on a shared time scale, the work a change targets in magenta with its total. Optional, like the trace tools. [Guide](tools/flamechart.md). |
 | [`tools/screendiff.py`](tools/screendiff.py) | Compares a before and an after screenshot pixel by pixel, leaving out the clock or anything you mask, and writes the pair with your Wi-Fi name blurred. Optional, like the trace tools. [Guide](tools/screendiff.md). |
 | [`tools/race_calendar.py`](tools/race_calendar.py) | Writes this season's F1 calendar into a theme for race-weekend mode, from the free Jolpica API. |
+| [`tools/quick_debloat.sh`](tools/quick_debloat.sh) | Smart TV auto-detector: queries device model & automatically applies the best debloat profile. |
+| [`tools/adblock.sh`](tools/adblock.sh) | 1-click system-wide AdGuard Private DNS toggle for Smart TVs. |
+| [`tools/speedtest.py`](tools/speedtest.py) | Cold-start app launch latency benchmark and performance comparison. |
 | [`launcher/build-and-install.sh`](launcher/build-and-install.sh) | Builds a shrunk release (about 474 KB), installs it, switches Home, and rolls back if Home does not land on it. |
 
 <details>
@@ -484,6 +487,8 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Ambient glow**: dynamic colored ambient glow behind the focused app banner.
   - **Frosted glass dock**: glassmorphic blur behind the favorite dock apps.
   - **Cinematic top shelf**: expands the focused app backdrop into a cinematic visual header.
+  - **Turbo motion (0.5x)**: ultra-snappy 0.5x duration curves and instant transitions for budget TV chipsets.
+  - **OLED pure black mode**: 0-nit absolute true-black display mode with disabled ambient backdrops to eliminate burn-in risk.
   - **System stats (CPU/RAM)**: shows real-time CPU load, free RAM, and storage in the header.
   - **Bluetooth pill**: quick status pill showing paired Bluetooth audio devices and remotes.
   - **Inputs pill**: fast input switcher showing HDMI 1, HDMI 2, AV, and Live TV ports.
@@ -492,9 +497,10 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Icon-only header buttons**: minimalist circular icon buttons for clean top bar aesthetics.
   - **Fade rows under clock**: subtle vertical fade gradient behind bottom app rows.
   - **Settings key**: choose whether the remote settings key opens the Quick Panel or TV System Settings.
-  - **Festive skin (Diwali)**: seasonal celebratory lighting effects and festival themes.
   - **Tile context menu**: long-press OK on any app tile to open options (Move, Hide, Uninstall).
   - **Screensaver idle timeout**: set screensaver sleep timer (Off, 5, 10, 15, 30 minutes, or Test now).
+  - **Clock typography**: ambient clock font styling (Minimalist, Bold Typographic, Retro Digital) for Home and screensaver.
+  - **Audio-only screen blanker**: power-saving black display mode that turns off the screen panel while streaming audio.
   - **Remote button shortcuts**: hardware button remapping engine for remote shortcut keys:
     - **Netflix button**: remap to launch YouTube, Kodi, Plex, or any installed app.
     - **Prime Video button**: remap to any app or custom shortcut.

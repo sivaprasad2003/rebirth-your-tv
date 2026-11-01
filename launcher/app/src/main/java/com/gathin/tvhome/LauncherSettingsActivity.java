@@ -42,11 +42,14 @@ public final class LauncherSettingsActivity extends Activity {
     private TextView wifiStatusColorChoice;
     private TextView iconOnlyButtonsChoice;
     private TextView cinematicChoice;
+    private TextView turboMotionChoice;
+    private TextView oledModeChoice;
     private TextView fadeRowsChoice;
     private TextView settingsKeyPanelChoice;
-    private TextView festivalChoice;
     private TextView tileMenuChoice;
     private TextView screensaverChoice;
+    private TextView clockStyleChoice;
+    private TextView screenBlankerChoice;
     private TextView remapNetflixChoice;
     private TextView remapPrimeChoice;
     private TextView remapHotstarChoice;
@@ -67,9 +70,12 @@ public final class LauncherSettingsActivity extends Activity {
     private boolean wifiStatusColor;
     private boolean iconOnlyButtons;
     private boolean cinematicHome;
+    private boolean turboMotion;
+    private boolean oledMode;
+    private boolean screenBlanker;
+    private int clockStyle;
     private boolean fadeRows;
     private boolean settingsKeyPanel;
-    private boolean festivalDiwali;
     private boolean tileMenu;
 
     @Override
@@ -98,9 +104,12 @@ public final class LauncherSettingsActivity extends Activity {
         wifiStatusColor = config.wifiStatusColor;
         iconOnlyButtons = config.iconOnlyButtons;
         cinematicHome = config.cinematicHome;
+        turboMotion = config.turboMotion;
+        oledMode = config.oledMode;
+        screenBlanker = config.screenBlanker;
+        clockStyle = config.clockStyle;
         fadeRows = config.fadeRows;
         settingsKeyPanel = config.settingsKeyPanel;
-        festivalDiwali = config.festival != null && "diwali".equalsIgnoreCase(config.festival.name);
         tileMenu = config.tileMenu;
 
         int[] ids = {R.id.columns4, R.id.columns5, R.id.columns6, R.id.columns7};
@@ -191,6 +200,20 @@ public final class LauncherSettingsActivity extends Activity {
             changed();
             refresh();
         });
+        turboMotionChoice = findViewById(R.id.turboMotionChoice);
+        turboMotionChoice.setOnClickListener(v -> {
+            turboMotion = !turboMotion;
+            choices.edit().putBoolean("turbo_motion", turboMotion).apply();
+            changed();
+            refresh();
+        });
+        oledModeChoice = findViewById(R.id.oledModeChoice);
+        oledModeChoice.setOnClickListener(v -> {
+            oledMode = !oledMode;
+            choices.edit().putBoolean("oled_mode", oledMode).apply();
+            changed();
+            refresh();
+        });
         showStatsChoice = findViewById(R.id.showStatsChoice);
         showStatsChoice.setOnClickListener(v -> {
             showStats = !showStats;
@@ -247,13 +270,6 @@ public final class LauncherSettingsActivity extends Activity {
             changed();
             refresh();
         });
-        festivalChoice = findViewById(R.id.festivalChoice);
-        festivalChoice.setOnClickListener(v -> {
-            festivalDiwali = !festivalDiwali;
-            choices.edit().putString("festival", festivalDiwali ? "diwali" : "none").apply();
-            changed();
-            refresh();
-        });
         tileMenuChoice = findViewById(R.id.tileMenuChoice);
         tileMenuChoice.setOnClickListener(v -> {
             tileMenu = !tileMenu;
@@ -263,6 +279,24 @@ public final class LauncherSettingsActivity extends Activity {
         });
         screensaverChoice = findViewById(R.id.screensaverChoice);
         screensaverChoice.setOnClickListener(v -> showScreensaverPicker());
+        clockStyleChoice = findViewById(R.id.clockStyleChoice);
+        clockStyleChoice.setOnClickListener(v -> {
+            clockStyle = (clockStyle + 1) % 3;
+            choices.edit().putInt("clock_style", clockStyle).apply();
+            changed();
+            refresh();
+        });
+        screenBlankerChoice = findViewById(R.id.screenBlankerChoice);
+        screenBlankerChoice.setOnClickListener(v -> {
+            screenBlanker = !screenBlanker;
+            choices.edit().putBoolean("screen_blanker", screenBlanker).apply();
+            changed();
+            refresh();
+        });
+        screenBlankerChoice.setOnLongClickListener(v -> {
+            startActivity(new Intent(this, BlankActivity.class));
+            return true;
+        });
         remapNetflixChoice = findViewById(R.id.remapNetflixChoice);
         remapNetflixChoice.setOnClickListener(v -> showAppPicker("remap_netflix", R.string.remap_netflix_label));
         remapPrimeChoice = findViewById(R.id.remapPrimeChoice);
@@ -284,7 +318,7 @@ public final class LauncherSettingsActivity extends Activity {
                     .remove("show_inputs_pill").remove("show_network_pill")
                     .remove("wifi_status_color").remove("icon_only_buttons")
                     .remove("cinematic_home").remove("fade_rows")
-                    .remove("settings_key_panel").remove("festival").remove("tile_menu")
+                    .remove("settings_key_panel").remove("tile_menu").remove("turbo_motion").remove("clock_style").remove("oled_mode").remove("screen_blanker")
                     .remove("home_idle_clock_minutes")
                     .remove("remap_netflix").remove("remap_prime")
                     .remove("remap_hotstar").remove("remap_sonyliv").remove("remap_livetv").commit();
@@ -305,8 +339,11 @@ public final class LauncherSettingsActivity extends Activity {
             cinematicHome = current.cinematicHome;
             fadeRows = current.fadeRows;
             settingsKeyPanel = current.settingsKeyPanel;
-            festivalDiwali = current.festival != null && "diwali".equalsIgnoreCase(current.festival.name);
             tileMenu = current.tileMenu;
+            turboMotion = current.turboMotion;
+            clockStyle = current.clockStyle;
+            oledMode = current.oledMode;
+            screenBlanker = current.screenBlanker;
             changed();
             refresh();
         });
@@ -535,6 +572,10 @@ public final class LauncherSettingsActivity extends Activity {
                 getString(dockGlass ? R.string.on : R.string.off)));
         cinematicChoice.setText(getString(R.string.cinematic_home_state,
                 getString(cinematicHome ? R.string.on : R.string.off)));
+        turboMotionChoice.setText(getString(R.string.turbo_motion_state,
+                getString(turboMotion ? R.string.on : R.string.off)));
+        oledModeChoice.setText(getString(R.string.oled_mode_state,
+                getString(oledMode ? R.string.on : R.string.off)));
         showStatsChoice.setText(getString(R.string.show_stats_state,
                 getString(showStats ? R.string.on : R.string.off)));
         showBluetoothChoice.setText(getString(R.string.show_bluetooth_pill_state,
@@ -551,13 +592,22 @@ public final class LauncherSettingsActivity extends Activity {
                 getString(fadeRows ? R.string.on : R.string.off)));
         settingsKeyPanelChoice.setText(getString(R.string.settings_key_panel_state,
                 getString(settingsKeyPanel ? R.string.settings_key_panel_quick : R.string.settings_key_panel_system)));
-        festivalChoice.setText(getString(R.string.festival_skin_state,
-                getString(festivalDiwali ? R.string.on : R.string.off)));
         tileMenuChoice.setText(getString(R.string.tile_menu_state,
                 getString(tileMenu ? R.string.on : R.string.off)));
         int idleMins = choices.getInt("home_idle_clock_minutes", 10);
         screensaverChoice.setText(getString(R.string.screensaver_choice_label,
                 idleMins == 0 ? getString(R.string.screensaver_off) : getString(R.string.screensaver_minutes, idleMins)));
+        String clockStyleLabel;
+        if (clockStyle == 1) {
+            clockStyleLabel = getString(R.string.clock_style_bold);
+        } else if (clockStyle == 2) {
+            clockStyleLabel = getString(R.string.clock_style_digital);
+        } else {
+            clockStyleLabel = getString(R.string.clock_style_minimal);
+        }
+        clockStyleChoice.setText(getString(R.string.clock_style_state, clockStyleLabel));
+        screenBlankerChoice.setText(getString(R.string.screen_blanker_state,
+                getString(screenBlanker ? R.string.on : R.string.off)));
         remapNetflixChoice.setText(getString(R.string.remap_netflix_format,
                 getAppLabel(choices.getString("remap_netflix", null))));
         remapPrimeChoice.setText(getString(R.string.remap_prime_format,
@@ -585,8 +635,8 @@ public final class LauncherSettingsActivity extends Activity {
                 || choices.contains("show_inputs_pill") || choices.contains("show_network_pill")
                 || choices.contains("wifi_status_color") || choices.contains("icon_only_buttons")
                 || choices.contains("cinematic_home") || choices.contains("fade_rows")
-                || choices.contains("settings_key_panel") || choices.contains("festival")
-                || choices.contains("tile_menu") || choices.contains("home_idle_clock_minutes")
+                || choices.contains("settings_key_panel") 
+                || choices.contains("tile_menu") || choices.contains("turbo_motion") || choices.contains("clock_style") || choices.contains("oled_mode") || choices.contains("screen_blanker") || choices.contains("home_idle_clock_minutes")
                 || choices.contains("remap_netflix") || choices.contains("remap_prime")
                 || choices.contains("remap_hotstar") || choices.contains("remap_sonyliv")
                 || choices.contains("remap_livetv");

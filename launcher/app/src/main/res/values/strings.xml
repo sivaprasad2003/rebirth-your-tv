@@ -75,8 +75,15 @@
     <string name="settings_key_panel_state">Settings key: %1$s</string>
     <string name="settings_key_panel_system">System Settings</string>
     <string name="settings_key_panel_quick">Quick Glass Panel</string>
-    <string name="festival_skin_state">Festive skin (Diwali): %1$s</string>
     <string name="tile_menu_state">Tile context menu: %1$s</string>
+    <string name="action_uninstall">Uninstall</string>
+    <string name="turbo_motion_state">Turbo motion (0.5x): %1$s</string>
+    <string name="oled_mode_state">OLED pure black mode: %1$s</string>
+    <string name="clock_style_state">Clock typography: %1$s</string>
+    <string name="clock_style_minimal">Minimalist</string>
+    <string name="clock_style_bold">Bold Typographic</string>
+    <string name="clock_style_digital">Retro Digital</string>
+    <string name="screen_blanker_state">Audio-only screen blanker: %1$s</string>
     <string name="tv_settings">TV system settings</string>
     <string name="quick_picture">Display</string>
     <string name="quick_network">Network</string>

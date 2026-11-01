@@ -142,6 +142,16 @@
                 android:id="@+id/cinematicChoice"
                 style="@style/SettingsRow"
                 android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/turboMotionChoice"
+                style="@style/SettingsRow"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/oledModeChoice"
+                style="@style/SettingsRow"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
 
         <!-- CARD 3: TOP BAR & NAVIGATION -->
@@ -213,6 +223,16 @@
             <TextView
                 android:id="@+id/screensaverChoice"
                 style="@style/SettingsRow" />
+
+            <TextView
+                android:id="@+id/clockStyleChoice"
+                style="@style/SettingsRow"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/screenBlankerChoice"
+                style="@style/SettingsRow"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
 
         <!-- CARD 5: REMOTE BUTTON SHORTCUTS -->

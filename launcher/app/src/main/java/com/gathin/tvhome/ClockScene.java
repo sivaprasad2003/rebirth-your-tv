@@ -56,6 +56,11 @@ final class ClockScene {
         colorIndex = random.nextInt(PALETTE.length);
         setGlow(PALETTE[colorIndex]);
         updateWeather();
+        android.widget.TextView dreamClock = root.findViewById(R.id.dreamClock);
+        if (dreamClock != null) {
+            Config cfg = Config.load(root.getContext());
+            Config.applyClockStyle(dreamClock, cfg.clockStyle);
+        }
     }
 
     void start() {
