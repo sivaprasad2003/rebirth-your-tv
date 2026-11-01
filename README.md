@@ -45,12 +45,20 @@ Smart TVs today ship with heavy, ad-ridden interfaces that degrade performance r
 **RebirthYourTV** brings flagship performance back to your TV:
 1. **🚀 430 KB Featherlight Launcher:** Written in pure native Java + AndroidX DynamicAnimation. Operates in only **~27 MB of RAM**, returning over 80% of memory back to your apps.
 2. **🏎️ True 60 FPS Fluidity:** Physics-based springs and GPU-accelerated state rendering deliver zero-lag remote responsiveness.
-3. **🛡️ 100% Non-Destructive Debloater:** Disables manufacturer telemetry and ad daemons using `pm disable-user --user 0`. No root, no unlocking, and completely safe.
-4. **💾 Bulletproof 1-Click Backup & Instant Restore:** `tools/backup.ps1` & `tools/backup.sh` captures your TV's exact state (packages, properties, secure settings) before any modification. Undo anytime with `tools/restore.ps1` / `restore.sh`.
-5. **🎮 Hardware Remote Button Remapper:** Remap Netflix, Prime Video, Hotstar, Sony LIV, and Live TV remote keys to launch your favorite apps (YouTube, Plex, Kodi, SmartTube, Stremio) directly from Launcher Settings.
-6. **🌙 Burn-in Safe Screensaver with Live Weather:** Ambient drift clock screensaver that shows real-time weather, temperature, and city name (e.g. `New York 22°C · Clear`) below date and time.
-7. **🎨 Glassmorphic TV Settings:** Modern card-based Leanback settings with mint/emerald focus halos for intuitive D-pad navigation.
-8. **🖼️ Boot-Persistent Wallpaper Engine:** Internal image cache keeps custom 4K/1080p wallpapers loaded instantly on TV power-up.
+3. **⚡ Turbo Motion (0.5x Curves):** High-stiffness 900f spring physics and 0.5x duration curves for instant response on budget 1 GB RAM Smart TVs.
+4. **🌙 True-Black OLED Pure Mode:** 0-nit obsidian black engine with zero ambient backdrops to eliminate OLED/Mini-LED pixel burn-in.
+5. **🎵 Audio-Only Display Blanker:** 1-click display sleep that turns off the TV screen panel while Spotify, YouTube Music, or Podcasts keep streaming.
+6. **🕹️ Long-Press Quick Actions:** Direct tile context menu on Home and App Library for instant **App Info** and **1-Click Uninstall**.
+7. **🕰️ Ambient Clock Typography:** Selectable font styles (**Minimalist**, **Bold Typographic**, **Retro Digital**) for both Home and screensaver.
+8. **🎯 Smart TV Auto-Detector (`quick_debloat`):** Automatic device probe (`ro.product.model`) that matches and applies the best debloat profile in 1 click.
+9. **🛡️ 1-Click AdGuard Private DNS (`adblock`):** System-wide adblocking across streaming apps via native Android Private DNS.
+10. **⏱️ App Launch Benchmark (`speedtest.py`):** Cold-start latency measuring tool comparing pre vs. post debloat speeds.
+11. **🛡️ 100% Non-Destructive Debloater:** Disables manufacturer telemetry and ad daemons using `pm disable-user --user 0`. No root, no unlocking, and completely safe.
+12. **💾 Bulletproof 1-Click Backup & Instant Restore:** `tools/backup.ps1` & `tools/backup.sh` captures your TV's exact state (packages, properties, secure settings) before any modification. Undo anytime with `tools/restore.ps1` / `restore.sh`.
+13. **🎮 Hardware Remote Button Remapper:** Remap Netflix, Prime Video, Hotstar, Sony LIV, and Live TV remote keys to launch your favorite apps (YouTube, Plex, Kodi, SmartTube, Stremio) directly from Launcher Settings.
+14. **🌙 Burn-in Safe Screensaver with Live Weather:** Ambient drift clock screensaver that shows real-time weather, temperature, and city name (e.g. `New York 22°C · Clear`) below date and time.
+15. **🎨 Glassmorphic TV Settings:** Modern card-based Leanback settings with mint/emerald focus halos for intuitive D-pad navigation.
+16. **🖼️ Boot-Persistent Wallpaper Engine:** Internal image cache keeps custom 4K/1080p wallpapers loaded instantly on TV power-up.
 
 ---
 
@@ -97,6 +105,13 @@ Smart TVs today ship with heavy, ad-ridden interfaces that degrade performance r
 | **RAM Footprint** | 300 MB – 450 MB+ | **~27 MB (90% Memory Saved!)** |
 | **APK Binary Size** | 50 MB – 120 MB+ | **430 KB (< 0.5 MB!)** |
 | **Frame Rate** | 25 – 40 FPS (Stuttery) | **60 FPS Locked (Zero-Lag)** |
+| **Weak Chipset Tuning** | Unusable sluggish lag | **Turbo Motion (0.5x Curves, 900f Springs)** |
+| **OLED Protection** | Static UI burn-in risk | **0-Nit True-Black OLED Pure Mode** |
+| **Audio-Only Screen Off** | Buried in 5 submenus | **1-Click Screen Blanker (Music Keeps Playing)** |
+| **Quick App Management** | Deep settings navigation | **Long-Press Quick Actions (App Info & Uninstall)** |
+| **Clock Customization** | Locked default font | **Minimalist / Bold / Retro Digital Styles** |
+| **Hardware Auto-Detection** | Manual trial & error | **Smart Auto-Detector (`tools/quick_debloat.sh`)** |
+| **System-Wide Adblocking** | None / Paid VPNs | **1-Click AdGuard Private DNS Switcher** |
 | **Home Screen Ads** | Autoplay video & banners | **0% Ads (Pure Obsidian Black)** |
 | **Remote Button Remap** | Locked to sponsors | **Remap any button to any app** |
 | **Ambient Screensaver** | Ad carousels / plain screen | **OLED Anti-Burn-in + Live Weather & City** |
@@ -131,7 +146,23 @@ TV_HOST=<YOUR_TV_IP> tools/backup.sh
 *Your backup is saved locally in `backup/<model>_<timestamp>/`.*
 
 ### Step 3: Debloat Your TV
-Apply the tested debloat list for your TV brand/model:
+You can use the new **Smart TV Auto-Detector** to detect and debloat automatically, or specify your profile manually:
+
+#### Option A: Smart TV Auto-Detector (Recommended)
+Automatically queries your TV model over ADB, matches it against all tested profiles in `examples/`, and applies the optimal debloat list:
+
+**Windows (PowerShell):**
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\quick_debloat.ps1 -TvHost <YOUR_TV_IP>
+```
+
+**macOS / Linux (Bash):**
+```bash
+TV_HOST=<YOUR_TV_IP> tools/quick_debloat.sh
+```
+
+#### Option B: Manual Profile Selection
+Choose your exact model from the [Supported TVs](#-supported-smart-tvs-benchmarks) table:
 
 **Windows (PowerShell):**
 ```powershell
@@ -141,6 +172,18 @@ powershell -ExecutionPolicy Bypass -File tools\disable.ps1 -TvHost <YOUR_TV_IP> 
 **macOS / Linux (Bash):**
 ```bash
 TV_HOST=<YOUR_TV_IP> tools/disable.sh examples/xiaomi-mi-tv-4a/debloat.txt
+```
+
+#### Option C: 1-Click AdGuard System-Wide Adblocking (Optional)
+Block in-app video ads and telemetry across all streaming apps with one command:
+```powershell
+powershell -ExecutionPolicy Bypass -File tools\adblock.ps1 -Action on -TvHost <YOUR_TV_IP>
+```
+
+#### Option D: Cold-Start Latency Benchmark (Optional)
+Test and verify your TV's speedup before and after debloating:
+```bash
+python3 tools/speedtest.py
 ```
 
 ### Step 4: Build & Install RebirthYourTV Launcher
