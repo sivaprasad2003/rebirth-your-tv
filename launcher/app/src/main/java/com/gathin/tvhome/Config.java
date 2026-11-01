@@ -212,6 +212,7 @@ final class Config {
     final boolean turboMotion;
     final boolean oledMode;
     final boolean screenBlanker;
+    final boolean doubleHomeSaver;
     final int clockStyle;
 
     private Config(List<String> dockApps, boolean fillDock, List<String> hiddenApps, List<String> libraryApps, String liveTvPackage,
@@ -227,7 +228,7 @@ final class Config {
                    List<RaceWeekend.Race> raceCalendar, boolean cinematicHome, boolean ambientGlow, boolean appGlow, boolean fadeRows, int homeIdleClockMinutes,
                    boolean keyFilter, boolean dockGlass, String glowStyle, boolean wallpaperCaptions,
                    boolean handleViewInputs, boolean tileMenu, boolean dockEvenPadding, boolean cinematicDots, boolean cinematicWhiteFocus, boolean wifiStatusColor, int cinematicScrim, int cinematicArt,
-                   Map<String, Set<String>> wallpaperMoods, boolean turboMotion, int clockStyle, boolean oledMode, boolean screenBlanker) {
+                   Map<String, Set<String>> wallpaperMoods, boolean turboMotion, int clockStyle, boolean oledMode, boolean screenBlanker, boolean doubleHomeSaver) {
         this.handleViewInputs = handleViewInputs;
         this.tileMenu = tileMenu;
         this.inputKeycodes = inputKeycodes;
@@ -314,6 +315,7 @@ final class Config {
         this.turboMotion = turboMotion;
         this.oledMode = oledMode;
         this.screenBlanker = screenBlanker;
+        this.doubleHomeSaver = doubleHomeSaver;
         this.clockStyle = clockStyle;
     }
 
@@ -513,6 +515,7 @@ final class Config {
         int clockStyle = choices.getInt("clock_style", 0);
         boolean oledMode = choices.getBoolean("oled_mode", false);
         boolean screenBlanker = choices.getBoolean("screen_blanker", false);
+        boolean doubleHomeSaver = choices.getBoolean("double_home_saver", true);
         int chosenIdle = choices.getInt("home_idle_clock_minutes", idleClockMinutes);
         if (chosenIdle >= 0 && chosenIdle <= 1440) idleClockMinutes = chosenIdle;
         appKeys = applyButtonRemap(appKeys, choices, "remap_netflix", new int[]{191});
@@ -584,7 +587,7 @@ final class Config {
                 Math.max(0, Math.min(100, skyIntensity)), settingsKeycodes, settingsKeyPanel, restoreKeyServices, wallpaperEnabled, wallpaper,
                 wallpapers, rotationMinutes, wallpaperDim, dockOpacity, wallpaperOrder, applied,
                 festival, inputKeycodes, appKeys, stockHomeRedirect, json == null ? Collections.emptyList() : raceCalendar(json), cinematic, ambientGlow, appGlow, fadeRows,
-                Math.max(0, idleClockMinutes), keyFilter, dockGlass, glowStyle, wallpaperCaptions, handleViewInputs, tileMenu, dockEvenPadding, cinematicDots, cinematicWhiteFocus, wifiStatusColor, cinematicScrim, cinematicArt, wallpaperMoods, turboMotion, clockStyle, oledMode, screenBlanker);
+                Math.max(0, idleClockMinutes), keyFilter, dockGlass, glowStyle, wallpaperCaptions, handleViewInputs, tileMenu, dockEvenPadding, cinematicDots, cinematicWhiteFocus, wifiStatusColor, cinematicScrim, cinematicArt, wallpaperMoods, turboMotion, clockStyle, oledMode, screenBlanker, doubleHomeSaver);
     }
 
     /**
@@ -669,7 +672,7 @@ final class Config {
                 choices.edit().remove("columns").remove("animations").remove("advanced_effects")
                         .remove(ROWS_BELOW_DOCK_KEY).remove(WALLPAPER_CHOICE_KEY).remove(DOCK_OPACITY_KEY)
                     .remove("remap_netflix").remove("remap_prime").remove("remap_hotstar")
-                    .remove("remap_sonyliv").remove("remap_livetv").remove("home_idle_clock_minutes").remove("turbo_motion").remove("clock_style").remove("oled_mode").remove("screen_blanker")
+                    .remove("remap_sonyliv").remove("remap_livetv").remove("home_idle_clock_minutes").remove("turbo_motion").remove("clock_style").remove("oled_mode").remove("screen_blanker").remove("double_home_saver")
                         .putString(THEME_SIGNATURE_KEY, signature).commit();
             } else {
                 choices.edit().putString(THEME_SIGNATURE_KEY, signature).commit();

@@ -233,6 +233,11 @@
                 android:id="@+id/screenBlankerChoice"
                 style="@style/SettingsRow"
                 android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/doubleHomeSaverChoice"
+                style="@style/SettingsRow"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
 
         <!-- CARD 5: REMOTE BUTTON SHORTCUTS -->

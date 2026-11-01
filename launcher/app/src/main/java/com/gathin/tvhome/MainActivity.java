@@ -137,6 +137,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private boolean turboMotion;
     private boolean oledMode;
     private boolean screenBlanker;
+    private boolean doubleHomeSaver = true;
+    private long lastHomePressTime = 0;
+    private static final long DOUBLE_PRESS_INTERVAL_MS = 750L;
     private String inputAction;
     private String inputUriScheme;
     private String sourcePanelService;
@@ -404,6 +407,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         turboMotion = cfg.turboMotion;
         oledMode = cfg.oledMode;
         screenBlanker = cfg.screenBlanker;
+        doubleHomeSaver = cfg.doubleHomeSaver;
         Config.applyClockStyle(findViewById(R.id.clock), cfg.clockStyle);
         inputAction = cfg.inputAction;
         inputUriScheme = cfg.inputUriScheme;
@@ -869,6 +873,17 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         if (openLauncherSettingsIfAsked(intent)) return;
         if (openInputsIfAsked(intent)) return;
         if (intent == null || !intent.hasCategory(Intent.CATEGORY_HOME)) return;
+        if (doubleHomeSaver) {
+            long now = SystemClock.uptimeMillis();
+            if (now - lastHomePressTime <= DOUBLE_PRESS_INTERVAL_MS) {
+                lastHomePressTime = 0;
+                Intent saver = new Intent(this, ClockActivity.class);
+                saver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(saver);
+                return;
+            }
+            lastHomePressTime = now;
+        }
         grid.scrollToPosition(0);
         lastFocused = 0;
         lastFocusedKey = adapter.getItemCount() > 0 ? adapter.keyAt(0) : null;
@@ -1233,6 +1248,19 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if (doubleHomeSaver && (event.getKeyCode() == KeyEvent.KEYCODE_HOME || event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS)) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                long now = SystemClock.uptimeMillis();
+                if (now - lastHomePressTime <= DOUBLE_PRESS_INTERVAL_MS) {
+                    lastHomePressTime = 0;
+                    Intent saver = new Intent(this, ClockActivity.class);
+                    saver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(saver);
+                    return true;
+                }
+                lastHomePressTime = now;
+            }
+        }
         if (handleSettingsKey(event)) return true;
         String appTarget = appKeys.get(event.getKeyCode());
         if (appTarget != null) {

@@ -544,6 +544,7 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Screensaver idle timeout**: set screensaver sleep timer (Off, 5, 10, 15, 30 minutes, or Test now).
   - **Clock typography**: ambient clock font styling (Minimalist, Bold Typographic, Retro Digital) for Home and screensaver.
   - **Audio-only screen blanker**: power-saving black display mode that turns off the screen panel while streaming audio.
+  - **Double-press Home screensaver**: double-tap the remote's Home button to immediately trigger the ambient screensaver.
   - **Remote button shortcuts**: hardware button remapping engine for remote shortcut keys:
     - **Netflix button**: remap to launch YouTube, Kodi, Plex, or any installed app.
     - **Prime Video button**: remap to any app or custom shortcut.

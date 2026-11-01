@@ -84,6 +84,7 @@
     <string name="clock_style_bold">Bold Typographic</string>
     <string name="clock_style_digital">Retro Digital</string>
     <string name="screen_blanker_state">Audio-only screen blanker: %1$s</string>
+    <string name="double_home_saver_state">Double-press Home screensaver: %1$s</string>
     <string name="tv_settings">TV system settings</string>
     <string name="quick_picture">Display</string>
     <string name="quick_network">Network</string>

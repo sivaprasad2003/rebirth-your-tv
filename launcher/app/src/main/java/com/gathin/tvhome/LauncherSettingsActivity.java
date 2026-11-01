@@ -50,6 +50,7 @@ public final class LauncherSettingsActivity extends Activity {
     private TextView screensaverChoice;
     private TextView clockStyleChoice;
     private TextView screenBlankerChoice;
+    private TextView doubleHomeSaverChoice;
     private TextView remapNetflixChoice;
     private TextView remapPrimeChoice;
     private TextView remapHotstarChoice;
@@ -73,6 +74,7 @@ public final class LauncherSettingsActivity extends Activity {
     private boolean turboMotion;
     private boolean oledMode;
     private boolean screenBlanker;
+    private boolean doubleHomeSaver;
     private int clockStyle;
     private boolean fadeRows;
     private boolean settingsKeyPanel;
@@ -107,6 +109,7 @@ public final class LauncherSettingsActivity extends Activity {
         turboMotion = config.turboMotion;
         oledMode = config.oledMode;
         screenBlanker = config.screenBlanker;
+        doubleHomeSaver = config.doubleHomeSaver;
         clockStyle = config.clockStyle;
         fadeRows = config.fadeRows;
         settingsKeyPanel = config.settingsKeyPanel;
@@ -297,6 +300,13 @@ public final class LauncherSettingsActivity extends Activity {
             startActivity(new Intent(this, BlankActivity.class));
             return true;
         });
+        doubleHomeSaverChoice = findViewById(R.id.doubleHomeSaverChoice);
+        doubleHomeSaverChoice.setOnClickListener(v -> {
+            doubleHomeSaver = !doubleHomeSaver;
+            choices.edit().putBoolean("double_home_saver", doubleHomeSaver).apply();
+            changed();
+            refresh();
+        });
         remapNetflixChoice = findViewById(R.id.remapNetflixChoice);
         remapNetflixChoice.setOnClickListener(v -> showAppPicker("remap_netflix", R.string.remap_netflix_label));
         remapPrimeChoice = findViewById(R.id.remapPrimeChoice);
@@ -318,7 +328,7 @@ public final class LauncherSettingsActivity extends Activity {
                     .remove("show_inputs_pill").remove("show_network_pill")
                     .remove("wifi_status_color").remove("icon_only_buttons")
                     .remove("cinematic_home").remove("fade_rows")
-                    .remove("settings_key_panel").remove("tile_menu").remove("turbo_motion").remove("clock_style").remove("oled_mode").remove("screen_blanker")
+                    .remove("settings_key_panel").remove("tile_menu").remove("turbo_motion").remove("clock_style").remove("oled_mode").remove("screen_blanker").remove("double_home_saver")
                     .remove("home_idle_clock_minutes")
                     .remove("remap_netflix").remove("remap_prime")
                     .remove("remap_hotstar").remove("remap_sonyliv").remove("remap_livetv").commit();
@@ -344,6 +354,7 @@ public final class LauncherSettingsActivity extends Activity {
             clockStyle = current.clockStyle;
             oledMode = current.oledMode;
             screenBlanker = current.screenBlanker;
+            doubleHomeSaver = current.doubleHomeSaver;
             changed();
             refresh();
         });
@@ -608,6 +619,8 @@ public final class LauncherSettingsActivity extends Activity {
         clockStyleChoice.setText(getString(R.string.clock_style_state, clockStyleLabel));
         screenBlankerChoice.setText(getString(R.string.screen_blanker_state,
                 getString(screenBlanker ? R.string.on : R.string.off)));
+        doubleHomeSaverChoice.setText(getString(R.string.double_home_saver_state,
+                getString(doubleHomeSaver ? R.string.on : R.string.off)));
         remapNetflixChoice.setText(getString(R.string.remap_netflix_format,
                 getAppLabel(choices.getString("remap_netflix", null))));
         remapPrimeChoice.setText(getString(R.string.remap_prime_format,
@@ -636,7 +649,7 @@ public final class LauncherSettingsActivity extends Activity {
                 || choices.contains("wifi_status_color") || choices.contains("icon_only_buttons")
                 || choices.contains("cinematic_home") || choices.contains("fade_rows")
                 || choices.contains("settings_key_panel") 
-                || choices.contains("tile_menu") || choices.contains("turbo_motion") || choices.contains("clock_style") || choices.contains("oled_mode") || choices.contains("screen_blanker") || choices.contains("home_idle_clock_minutes")
+                || choices.contains("tile_menu") || choices.contains("turbo_motion") || choices.contains("clock_style") || choices.contains("oled_mode") || choices.contains("screen_blanker") || choices.contains("double_home_saver") || choices.contains("home_idle_clock_minutes")
                 || choices.contains("remap_netflix") || choices.contains("remap_prime")
                 || choices.contains("remap_hotstar") || choices.contains("remap_sonyliv")
                 || choices.contains("remap_livetv");
