@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="rmw7GRWYb2WG0rHyhIseNd9kVyNv3qJixh3ybPTCeIM">
+  <title>RebirthYourTV — Give Your Smart TV a Second Life (100% Non-Root Debloater & 60 FPS Launcher)</title>
+  <meta name="description" content="Turn sluggish, ad-infested Android TV and Google TV devices into buttery-smooth 60 FPS streaming powerhouses. 100% non-root, 430 KB featherlight footprint, ambient weather screensaver, and 1-click ADB recovery.">
+  <meta name="keywords" content="Android TV debloat, Google TV debloat, fast Android TV launcher, RebirthYourTV, clean your tv, TV debloater, adblock TV, 60fps TV launcher">
+  <meta name="author" content="Sivaprasad (sivaprasad2003)">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sivaprasad2003.github.io/rebirth-your-tv/">
+  <meta property="og:title" content="RebirthYourTV — Give Your Smart TV a Second Life">
+  <meta property="og:description" content="Turn laggy, ad-heavy Smart TVs into 60 FPS beasts. 100% non-root, 430 KB APK, zero ads, zero telemetry.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/sivaprasad2003/rebirth-your-tv/main/website/favicon.svg">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background Ambient Grid -->
+  <div class="bg-grid"></div>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        <img src="favicon.svg" alt="RebirthYourTV Logo" class="brand-icon">
+        <span>Rebirth<span style="color: var(--primary-light);">YourTV</span></span>
+        <span class="badge-onair"><span class="pulse-dot"></span> 60 FPS</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#performance">Benchmark</a></li>
+          <li><a href="#comparison-slider">Before/After</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#prompt">Prompt</a></li>
+          <li><a href="#compatibility">TV Models</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-sm btn-copy-prompt">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          Copy Prompt
+        </button>
+
+        <a href="https://github.com/sivaprasad2003/rebirth-your-tv" target="_blank" rel="noopener" class="btn btn-github btn-sm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub
+          <span class="star-count" id="githubStarCount">★ Star</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="overview">
+      <div class="container">
+        <div class="hero-pill">
+          <span>✨ 100% Non-Root • Instant ADB Wi-Fi Sideload</span>
+        </div>
+
+        <h1 class="hero-title">
+          Give Your Smart TV a <br>
+          <span class="gradient-text">Second Life.</span>
+        </h1>
+
+        <p class="hero-desc">
+          Transform sluggish, ad-ridden Android TV & Google TV devices into blistering 60 FPS streaming beasts. 
+          Zero manufacturer telemetry, a 430 KB featherweight launcher, live weather screensaver, and 100% reversible ADB recovery.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg btn-copy-prompt">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy 1-Click AI Prompt
+          </button>
+
+          <a href="https://github.com/sivaprasad2003/rebirth-your-tv" target="_blank" rel="noopener" class="btn btn-glass btn-lg">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            View on GitHub
+          </a>
+
+          <a href="#steps" class="btn btn-glass btn-lg">
+            ⚡ Quick Setup Guide
+          </a>
+        </div>
+
+        <!-- Metric Pills -->
+        <div class="stats-row">
+          <div class="stat-pill">
+            <span style="color: #38bdf8;">⚡</span>
+            <span>Framerate: <strong>60 FPS Locked</strong></span>
+          </div>
+          <div class="stat-pill">
+            <span style="color: #10b981;">🪶</span>
+            <span>APK Size: <strong>430 KB</strong></span>
+          </div>
+          <div class="stat-pill">
+            <span style="color: #818cf8;">🧠</span>
+            <span>RAM Used: <strong>~27 MB</strong> (vs 400MB)</span>
+          </div>
+          <div class="stat-pill">
+            <span style="color: #f59e0b;">🛡️</span>
+            <span>System: <strong>100% Non-Root</strong></span>
+          </div>
+          <div class="stat-pill">
+            <span style="color: #ec4899;">💾</span>
+            <span>Safety: <strong>1-Click Backup & Undo</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Smart TV Showcase -->
+    <section class="tv-showcase-section">
+      <div class="container">
+        <div class="tv-container">
+          <!-- Screen Mode Tabs -->
+          <div class="tv-mode-tabs">
+            <button class="mode-tab active" data-mode="home">
+              <span>🏠</span> Home Dock
+            </button>
+            <button class="mode-tab" data-mode="screensaver">
+              <span>🌙</span> Weather Screensaver
+            </button>
+            <button class="mode-tab" data-mode="settings">
+              <span>⚙️</span> Glass Settings
+            </button>
+            <button class="mode-tab" data-mode="inputs">
+              <span>🔌</span> HDMI & Inputs
+            </button>
+            <button class="mode-tab" data-mode="grid">
+              <span>📱</span> Apps Grid
+            </button>
+            <button class="mode-tab" data-mode="quick">
+              <span>⚡</span> Quick Panel
+            </button>
+          </div>
+
+          <!-- TV Frame -->
+          <div class="tv-frame">
+            <img src="assets/screenshots/home.png" alt="RebirthYourTV 60 FPS Leanback Home Screen" class="tv-live-screenshot" id="screenHome">
+            <img src="assets/screenshots/screensaver.png" alt="RebirthYourTV Ambient Screensaver" class="tv-live-screenshot" id="screenScreensaver" style="display: none;">
+            <img src="assets/screenshots/settings.png" alt="RebirthYourTV Redesigned Leanback Settings" class="tv-live-screenshot" id="screenSettings" style="display: none;">
+            <img src="assets/screenshots/inputs_menu.png" alt="TV HDMI & Source Input Selector Dialog" class="tv-live-screenshot" id="screenInputs" style="display: none;">
+            <img src="assets/screenshots/grid.png" alt="RebirthYourTV All Apps Library Grid" class="tv-live-screenshot" id="screenGrid" style="display: none;">
+            <img src="assets/screenshots/quick_panel.png" alt="Quick Settings TV Panel Overlay" class="tv-live-screenshot" id="screenQuick" style="display: none;">
+
+            <div class="tv-bezel-bottom">
+              <div class="tv-power-led"></div>
+            </div>
+          </div>
+
+          <div class="tv-stand"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live 60 FPS Performance Benchmark & Meter -->
+    <section class="perf-benchmark-section" id="performance">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">HARDWARE TELEMETRY</span>
+          <h2 class="section-title">Silky Smooth 60 FPS Locked Performance</h2>
+          <p class="section-desc">Live frame-time telemetry and resource footprint measured on budget 1 GB RAM Android TV hardware.</p>
+        </div>
+
+        <div class="perf-card">
+          <div class="perf-grid">
+            <div class="fps-canvas-container">
+              <div class="fps-canvas-header">
+                <span>UI Render Thread (V-Sync)</span>
+                <span class="fps-live-badge"><span class="pulse-dot"></span> <span id="liveFpsValue">60.0</span> FPS</span>
+              </div>
+              <canvas id="fpsCanvas" width="560" height="140"></canvas>
+            </div>
+
+            <div class="perf-stats-grid">
+              <div class="perf-stat-box">
+                <div class="stat-label">Frametime Target</div>
+                <div class="stat-value" id="liveFrametimeVal">16.6 ms</div>
+                <div class="stat-sub">Zero Jitter • 100% Locked</div>
+              </div>
+              <div class="perf-stat-box">
+                <div class="stat-label">Memory Footprint</div>
+                <div class="stat-value">26.8 MB</div>
+                <div class="stat-sub">90% Less than Stock (~420 MB)</div>
+              </div>
+              <div class="perf-stat-box">
+                <div class="stat-label">APK Package Size</div>
+                <div class="stat-value">430 KB</div>
+                <div class="stat-sub">&lt; 0.5 MB Zero Heavy WebViews</div>
+              </div>
+              <div class="perf-stat-box">
+                <div class="stat-label">Jank & Dropped Frames</div>
+                <div class="stat-value" style="color: #6ee7b7;">0.00%</div>
+                <div class="stat-sub">10,000 Continuous Frames Tested</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before / After Split Comparison Slider -->
+    <section class="before-after-section" id="comparison-slider">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">TRANSFORMATION</span>
+          <h2 class="section-title">See the Difference: Before vs. After</h2>
+          <p class="section-desc">Drag the interactive slider to compare the cluttered, ad-heavy stock TV screen with RebirthYourTV's clean 60 FPS obsidian interface.</p>
+        </div>
+
+        <div class="before-after-box" id="beforeAfterBox">
+          <!-- After (RebirthYourTV Clean Screen) - Background -->
+          <img src="assets/screenshots/home.png" alt="RebirthYourTV Clean 60 FPS Interface" class="before-after-img">
+          <span class="tag-after">RebirthYourTV (Clean & Fast)</span>
+
+          <!-- Before (Stock Cluttered TV) - Overlay with clipping width -->
+          <div class="before-img-layer" id="beforeImgLayer">
+            <img src="assets/screenshots/stock_bloat.png" alt="Stock Cluttered Android TV Screen" id="beforeImgInner">
+            <span class="tag-before">Stock TV (Laggy & Cluttered)</span>
+          </div>
+
+          <!-- Draggable Divider -->
+          <div class="slider-divider" id="sliderDivider">
+            <div class="slider-handle-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+              <span>DRAG</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real TV Hardware Screenshot Gallery (Complete 12-Card Suite) -->
+    <section class="gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">HARDWARE VERIFICATION</span>
+          <h2 class="section-title">Latest Real TV Hardware Captures (12 Captures)</h2>
+          <p class="section-desc">100% authentic uncompressed 1080p captures taken directly over ADB during live performance testing. Click any screenshot for high-res preview and arrow navigation.</p>
+        </div>
+
+        <!-- Gallery Category Filter Tabs -->
+        <div class="gallery-filter-chips">
+          <button class="filter-chip active" data-filter="all">All Captures (12)</button>
+          <button class="filter-chip" data-filter="home">Home & Motion</button>
+          <button class="filter-chip" data-filter="screensaver">Screensaver & Clock</button>
+          <button class="filter-chip" data-filter="settings">Glass Settings</button>
+          <button class="filter-chip" data-filter="hardware">TV Hardware & Inputs</button>
+          <button class="filter-chip" data-filter="library">App Library & Panel</button>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Card 1: Home Dock -->
+          <div class="gallery-card" data-category="home">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/home.png" alt="RebirthYourTV 60 FPS Leanback Home Screen" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">60 FPS Locked</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Xiaomi Mi TV 4A • Android 14</div>
+              <h3 class="gallery-title">Featherlight Leanback Home</h3>
+              <p class="gallery-desc">Obsidian backdrop with custom wallpaper, focused app dock, live Wi-Fi signal pill, zero ads.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: D-Pad Dock Focus -->
+          <div class="gallery-card" data-category="home">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/dock_focus.png" alt="D-Pad Dock Focus Dynamics" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">1.08x Spring Physics</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Hardware DynamicAnimation</div>
+              <h3 class="gallery-title">D-Pad Dock Focus Dynamics</h3>
+              <p class="gallery-desc">Physics-driven micro-spring feedback centering focused dock tiles with smooth emerald glow.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Focus Zoom Interaction -->
+          <div class="gallery-card" data-category="home">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/focus_youtube.png" alt="App Tile Focus Zoom State" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">16.6ms Latency</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">AndroidX DynamicAnimation</div>
+              <h3 class="gallery-title">App Tile Focus Zoom State</h3>
+              <p class="gallery-desc">Instant visual feedback with sub-pixel elevation and high-contrast outline on TV remote selection.</p>
+            </div>
+          </div>
+
+          <!-- Card 4: Weather Screensaver -->
+          <div class="gallery-card" data-category="screensaver">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/screensaver.png" alt="RebirthYourTV Ambient Screensaver" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Zero CPU Drain</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">OLED Anti-Burn-in Protection</div>
+              <h3 class="gallery-title">Ambient Weather Screensaver</h3>
+              <p class="gallery-desc">Drift clock with live date, day, temperature, condition icon, and city name (28°C · Hyderabad).</p>
+            </div>
+          </div>
+
+          <!-- Card 5: Screensaver System Integration -->
+          <div class="gallery-card" data-category="screensaver">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/screensaver_settings.png" alt="Android TV Screensaver Selector" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Native Service</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">System Framework Hook</div>
+              <h3 class="gallery-title">Android TV Screensaver Selector</h3>
+              <p class="gallery-desc">Registers directly into Android TV's native DreamService screensaver menu for automatic activation.</p>
+            </div>
+          </div>
+
+          <!-- Card 6: Settings Glass Cards -->
+          <div class="gallery-card" data-category="settings">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/settings.png" alt="RebirthYourTV Redesigned Leanback Settings" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Glassmorphism UI</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Leanback Card Layout</div>
+              <h3 class="gallery-title">Redesigned Glass Card Settings</h3>
+              <p class="gallery-desc">6 structured categories with emerald focus glow and instantaneous D-pad navigation.</p>
+            </div>
+          </div>
+
+          <!-- Card 7: Settings Detailed Controls -->
+          <div class="gallery-card" data-category="settings">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/settings_scroll.png" alt="Launcher Settings Display & Sleep Controls" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Fine Tuning</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Customization Controls</div>
+              <h3 class="gallery-title">Display, Motion & Sleep Controls</h3>
+              <p class="gallery-desc">Adjust columns (4-7), focus overshoot physics, screensaver timeout (10 mins), and wallpaper dimming.</p>
+            </div>
+          </div>
+
+          <!-- Card 8: HDMI & Source Inputs Overlay -->
+          <div class="gallery-card" data-category="hardware">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/inputs_menu.png" alt="HDMI & Source Inputs Overlay Dialog" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Instant Switching</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">TV Input Framework</div>
+              <h3 class="gallery-title">HDMI & Source Inputs Overlay</h3>
+              <p class="gallery-desc">One-click switching dialog between HDMI 1, HDMI 2, AV, and TV tuner inputs without exiting.</p>
+            </div>
+          </div>
+
+          <!-- Card 9: Top Bar Wi-Fi & Status -->
+          <div class="gallery-card" data-category="hardware">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/wifi_status.png" alt="Top Bar Wi-Fi & Status Pill" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Live Telemetry</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Real-time Connectivity</div>
+              <h3 class="gallery-title">Top Bar Wi-Fi & Status Pill</h3>
+              <p class="gallery-desc">Low-profile glass pill displaying active Wi-Fi SSID, signal strength, and network connection state.</p>
+            </div>
+          </div>
+
+          <!-- Card 10: Bluetooth Pairing -->
+          <div class="gallery-card" data-category="hardware">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/bluetooth_pairing.png" alt="Bluetooth Accessories & Remote Pairing" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Zero-Friction</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Native BLE Pairing</div>
+              <h3 class="gallery-title">Bluetooth Accessories & Remotes</h3>
+              <p class="gallery-desc">Quick-launch access to pair gamepads, audio soundbars, headphones, and Bluetooth remotes.</p>
+            </div>
+          </div>
+
+          <!-- Card 11: Apps Grid -->
+          <div class="gallery-card" data-category="library">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/grid.png" alt="RebirthYourTV All Apps Library Grid" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Zero Bloat</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Clean App Library</div>
+              <h3 class="gallery-title">Clean App Library Grid</h3>
+              <p class="gallery-desc">Direct access to all installed sideloaded & TV apps with instant search and zero sponsored carousels.</p>
+            </div>
+          </div>
+
+          <!-- Card 12: Quick Settings Panel -->
+          <div class="gallery-card" data-category="library">
+            <div class="gallery-img-wrapper">
+              <img src="assets/screenshots/quick_panel.png" alt="Quick Settings TV Panel Overlay" class="gallery-img" loading="lazy">
+              <span class="gallery-badge">Instant Flyout</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-meta">Side Panel Overlay</div>
+              <h3 class="gallery-title">Quick Settings Panel Overlay</h3>
+              <p class="gallery-desc">Fast-access panel for Wi-Fi toggle, picture modes, audio settings, and TV sleep without leaving your app.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upgraded Fullscreen Image Lightbox Modal with Arrow Navigation -->
+    <div class="lightbox-modal" id="lightboxModal">
+      <span class="lightbox-close" id="lightboxClose" title="Close (Esc)">&times;</span>
+      <button class="lightbox-nav-btn prev" id="lightboxPrev" title="Previous Image (Left Arrow)">&#10094;</button>
+      <button class="lightbox-nav-btn next" id="lightboxNext" title="Next Image (Right Arrow)">&#10095;</button>
+      <div class="lightbox-img-container">
+        <img src="" alt="Screenshot Full View" class="lightbox-img" id="lightboxImg">
+        <div class="lightbox-caption-box">
+          <div class="lightbox-caption" id="lightboxCaption"></div>
+          <div class="lightbox-counter" id="lightboxCounter">1 / 12</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 1-Click AI Agent Prompt Section -->
+    <section class="prompt-section" id="prompt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">AI-ASSISTED SETUP</span>
+          <h2 class="section-title">The 30-Second AI Prompt</h2>
+          <p class="section-desc">
+            Copy and paste this prompt directly into Claude Code, Gemini CLI, or AGY on a computer on the same Wi-Fi. 
+            The assistant handles ADB connection, backup, debloating, and launcher installation automatically.
+          </p>
+        </div>
+
+        <div class="prompt-terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+
+            <div class="terminal-title">rebirth-your-tv-prompt.md</div>
+
+            <div class="prompt-tabs">
+              <button class="prompt-tab active" data-tab="universal">Universal AI</button>
+              <button class="prompt-tab" data-tab="powershell">PowerShell</button>
+              <button class="prompt-tab" data-tab="bash">Bash / macOS</button>
+            </div>
+          </div>
+
+          <div class="terminal-body">
+            <pre class="terminal-code" id="terminalCodeBlock"></pre>
+          </div>
+
+          <div class="terminal-footer">
+            <span class="terminal-hint">💡 Requires ADB / Wi-Fi debugging enabled on your TV</span>
+            <button class="btn btn-primary btn-sm btn-copy-prompt">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy Full Prompt
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison-section" id="comparison">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">HEAD-TO-HEAD</span>
+          <h2 class="section-title">Stock Bloatware vs. RebirthYourTV</h2>
+          <p class="section-desc">See the dramatic performance and privacy difference on real TV hardware.</p>
+        </div>
+
+        <div class="comparison-table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature / Benchmark</th>
+                <th>Stock Google / Android TV</th>
+                <th class="highlight">RebirthYourTV (Optimized)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="feature-name">UI Framerate</td>
+                <td><span class="badge-bad">❌ 25 - 35 FPS (Laggy)</span></td>
+                <td><span class="badge-good">✅ 60 FPS Locked Smooth</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">RAM Footprint</td>
+                <td><span class="badge-bad">❌ 350 MB - 500 MB RAM</span></td>
+                <td><span class="badge-good">✅ ~27 MB Ultra-Lean</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Home Screen Ads</td>
+                <td><span class="badge-bad">❌ Full-screen Autoplay Ads</span></td>
+                <td><span class="badge-good">✅ 0 Ads (Clean Minimalist)</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Background Telemetry</td>
+                <td><span class="badge-bad">❌ 15+ Tracking Daemons</span></td>
+                <td><span class="badge-good">✅ 100% Disabled</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Launcher Package Size</td>
+                <td><span class="badge-bad">❌ 80+ MB Vendor App</span></td>
+                <td><span class="badge-good">✅ 430 KB Lightweight APK</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Safety & Warranty</td>
+                <td><span class="badge-bad">❌ Locked / Risky Root Methods</span></td>
+                <td><span class="badge-good">✅ 100% Non-Root ADB Safe</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Dedicated System Backup</td>
+                <td><span class="badge-bad">❌ None</span></td>
+                <td><span class="badge-good">✅ 1-Click Snapshot & Restore</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Remote Button Remapping</td>
+                <td><span class="badge-bad">❌ Hardcoded by Factory</span></td>
+                <td><span class="badge-good">✅ Netflix, Prime, Hotstar Remappable</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">OLED Screen Protection</td>
+                <td><span class="badge-bad">❌ Static UI Burn-in Risk</span></td>
+                <td><span class="badge-good">✅ 0-Nit True-Black OLED Pure Mode</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Budget Chipset Motion</td>
+                <td><span class="badge-bad">❌ Sluggish 25-35 FPS Lag</span></td>
+                <td><span class="badge-good">✅ Turbo Motion (0.5x Instant Springs)</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Audio-Only Screen Off</td>
+                <td><span class="badge-bad">❌ Deep Hidden Submenus</span></td>
+                <td><span class="badge-good">✅ 1-Click Display Blanker (Music Plays)</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Tile Quick Actions</td>
+                <td><span class="badge-bad">❌ Complex App Menus</span></td>
+                <td><span class="badge-good">✅ Long-Press App Info &amp; 1-Click Uninstall</span></td>
+              </tr>
+              <tr>
+                <td class="feature-name">Smart Model Auto-Detect</td>
+                <td><span class="badge-bad">❌ Manual Guesswork</span></td>
+                <td><span class="badge-good">✅ 1-Click Auto-Probe (quick_debloat)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">ENGINEERED FOR EXCELLENCE</span>
+          <h2 class="section-title">Built Without Compromise</h2>
+          <p class="section-desc">Every pixel, line of code, and animation is designed to maximize speed on TVs with as little as 1 GB of RAM.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-box">🏎️</div>
+            <h3 class="feature-title">Locked 60 FPS Motion</h3>
+            <p class="feature-desc">
+              Built using raw AndroidX DynamicAnimation with spring physics and zero heavy webviews or JavaScript bridges. Buttery smooth D-pad responses.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🌦️</div>
+            <h3 class="feature-title">Ambient Weather Screensaver</h3>
+            <p class="feature-desc">
+              OLED burn-in protected drift clock with live date, day, temperature, condition icon, city name, and instant Double-Press Home shortcut activation. Zero background battery or CPU drain.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">⚙️</div>
+            <h3 class="feature-title">Leanback Glass Settings</h3>
+            <p class="feature-desc">
+              Redesigned modern TV settings categorized into 6 elegant glass cards: Grid Layout, Visual Motion, Top Bar, Screensaver, Remote Remapper, and Default Home.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">💾</div>
+            <h3 class="feature-title">1-Click Full System Backup</h3>
+            <p class="feature-desc">
+              Our dedicated backup engine snapshots all 170+ package states, properties, and home settings before touching anything. 100% peace of mind.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🕹️</div>
+            <h3 class="feature-title">Remote Button Remapper</h3>
+            <p class="feature-desc">
+              Remap sponsored remote buttons (Netflix, Prime Video, JioHotstar, Sony LIV, Live TV) to open your preferred apps or HDMI ports.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🛡️</div>
+            <h3 class="feature-title">Privacy & AdGuard DNS</h3>
+            <p class="feature-desc">
+              Disables manufacturer telemetry and pairs seamlessly with Private DNS (dns.adguard-dns.com) for network-wide ad blocking across apps.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🌙</div>
+            <h3 class="feature-title">True-Black OLED Pure Mode</h3>
+            <p class="feature-desc">
+              0-nit obsidian black background with disabled ambient lighting. Eliminates pixel degradation and burn-in risk on OLED &amp; Mini-LED TVs.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">⚡</div>
+            <h3 class="feature-title">Turbo Motion (0.5x Curves)</h3>
+            <p class="feature-desc">
+              Ultra-responsive 900f spring physics and 0.5x transition curves crafted specifically for budget TV chipsets with 1 GB RAM.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🎵</div>
+            <h3 class="feature-title">Audio-Only Screen Blanker</h3>
+            <p class="feature-desc">
+              Instant screen display blanker: turns off the TV screen panel while Spotify, YouTube Music, or Podcasts stream in the background.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-box">🎯</div>
+            <h3 class="feature-title">Smart Auto-Detect &amp; Speedtest</h3>
+            <p class="feature-desc">
+              One-click TV detection script (<code>quick_debloat</code>) to automatically match device profiles, plus <code>speedtest.py</code> cold-start latency benchmarking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compatibility Section -->
+    <section class="compatibility-section" id="compatibility">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">DEVICE SUPPORT</span>
+          <h2 class="section-title">Tested on 716+ Smart TV Models</h2>
+          <p class="section-desc">Search through verified community debloat profiles for your specific TV brand and model.</p>
+        </div>
+
+        <div class="search-box-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="tvSearchInput" class="search-input" placeholder="Search by model or brand (e.g. Sony, Mi TV, TCL, Fire TV)...">
+        </div>
+
+        <div class="brand-chips-row">
+          <button class="brand-chip active" data-brand="All">All Brands</button>
+          <button class="brand-chip" data-brand="Xiaomi">Xiaomi / Redmi</button>
+          <button class="brand-chip" data-brand="TCL">TCL / FFalcon</button>
+          <button class="brand-chip" data-brand="Sony">Sony BRAVIA</button>
+          <button class="brand-chip" data-brand="Philips">Philips</button>
+          <button class="brand-chip" data-brand="Hisense">Hisense</button>
+          <button class="brand-chip" data-brand="Amazon">Amazon Fire TV</button>
+          <button class="brand-chip" data-brand="OnePlus">OnePlus TV</button>
+          <button class="brand-chip" data-brand="Google">Google / Chromecast</button>
+        </div>
+
+        <div class="models-grid" id="modelsGrid"></div>
+      </div>
+    </section>
+
+    <!-- 5-Minute Setup Steps -->
+    <section class="steps-section" id="steps">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">EASY 5-MINUTE GUIDE</span>
+          <h2 class="section-title">How It Works in 4 Steps</h2>
+          <p class="section-desc">No cables needed. Connect over Wi-Fi, snapshot your TV, and experience true speed.</p>
+        </div>
+
+        <div class="steps-list">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Enable ADB Debugging</h3>
+            <p class="step-desc">On your TV: Settings → Device Preferences → About → Click "Build" 7 times. Then go to Developer Options and turn on USB Debugging.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Connect Over Wi-Fi</h3>
+            <p class="step-desc">Connect from your computer using <code>adb connect &lt;TV_IP&gt;:5555</code>. Accept the "Allow USB debugging" prompt on your TV screen.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3 class="step-title">1-Click Full Backup</h3>
+            <p class="step-desc">Run <code>tools/backup.ps1</code> (or <code>tools/backup.sh</code>) to automatically record all 170+ packages and system properties into a safe timestamped folder.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Debloat & Launch</h3>
+            <p class="step-desc">Run the debloater script and install RebirthYourTV launcher. Enjoy buttery-smooth 60 FPS and zero sponsored recommendations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">GOT QUESTIONS?</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can RebirthYourTV brick my Smart TV?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <strong>No.</strong> RebirthYourTV uses Android's sanctioned <code>pm disable-user --user 0</code> command. It never uninstalls system applications and never modifies the read-only system firmware partition. Furthermore, core Android system packages (systemui, packageinstaller, settings) are hard-protected and cannot be touched.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is Root access or bootloader unlocking required?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <strong>100% Non-Root.</strong> Everything runs through standard ADB over Wi-Fi. You do not void your manufacturer warranty, trip Knox/Play Integrity, or break DRM certifications.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Will Netflix, Prime Video, 4K HDR, and Dolby Atmos still work?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <strong>Yes!</strong> All Widevine L1 DRM keys, Dolby Vision, Dolby Atmos, and 4K HDR streaming certifications remain completely intact because system integrity is never compromised.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How do I restore everything back to factory condition?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Simply run <code>tools/restore.ps1</code> on Windows or <code>tools/restore.sh</code> on macOS/Linux. It immediately re-enables all disabled packages, re-activates the stock launcher, and restores original animation scales.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Does the ambient weather screensaver drain RAM or battery?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              <strong>Zero background drain.</strong> The weather data is cached locally inside SharedPreferences and only read once on start and every 1-minute drift tick. There are no background services, no persistent polling, and no wakelocks.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast-banner" id="toastBanner">✓ Copied to clipboard!</div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#" class="brand-logo" style="margin-bottom: 8px;">
+            <img src="favicon.svg" alt="RebirthYourTV Logo" class="brand-icon">
+            <span>Rebirth<span style="color: var(--primary-light);">YourTV</span></span>
+          </a>
+          <p class="footer-desc">
+            An open-source movement to breathe new life into Android & Google TVs. Fast, safe, private, and 100% non-root.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 14px;">
+          <button class="btn btn-primary btn-sm btn-copy-prompt">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy Prompt
+          </button>
+          <a href="https://github.com/sivaprasad2003/rebirth-your-tv" target="_blank" rel="noopener" class="btn btn-glass btn-sm">
+            GitHub Repo
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Created & maintained with ❤️ by <a href="https://github.com/sivaprasad2003" target="_blank" rel="noopener" style="font-weight: 700; color: #6ee7b7;">Sivaprasad (@sivaprasad2003)</a>.
+        </div>
+        <div>
+          Released under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
