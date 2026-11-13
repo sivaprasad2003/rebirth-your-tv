@@ -70,7 +70,7 @@ final class RecentApps {
             }
         }
 
-        // Fallback if no recent history: discover running third-party processes
+        // Fallback if no recent history: discover running third-party processes or top installed TV apps
         if (entries.isEmpty()) {
             ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
             if (am != null) {
@@ -89,6 +89,20 @@ final class RecentApps {
                             }
                         }
                         if (entries.size() >= 5) break;
+                    }
+                }
+            }
+            if (entries.isEmpty()) {
+                android.content.Intent mainIntent = new android.content.Intent(android.content.Intent.ACTION_MAIN, null);
+                mainIntent.addCategory(android.content.Intent.CATEGORY_LEANBACK_LAUNCHER);
+                List<android.content.pm.ResolveInfo> resolveInfos = pm.queryIntentActivities(mainIntent, 0);
+                if (resolveInfos != null) {
+                    for (android.content.pm.ResolveInfo ri : resolveInfos) {
+                        String pkg = ri.activityInfo.packageName;
+                        if (pkg != null && !pkg.equals(ctx.getPackageName())) {
+                            entries.add(new Entry(pkg, ri.loadLabel(pm).toString(), ri.loadIcon(pm)));
+                            if (entries.size() >= 6) break;
+                        }
                     }
                 }
             }
