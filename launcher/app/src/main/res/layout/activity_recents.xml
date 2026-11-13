@@ -3,7 +3,7 @@
     android:id="@+id/recentsScrim"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D9050814">
+    android:background="#BF080C14">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,57 +12,33 @@
         android:paddingStart="48dp"
         android:paddingEnd="48dp"
         android:paddingTop="36dp"
-        android:paddingBottom="36dp">
+        android:paddingBottom="32dp">
 
         <!-- Header -->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/recentsTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recent_apps_title"
-                    android:textColor="#FFFFFFFF"
-                    android:textSize="28sp"
-                    android:fontFamily="@string/font_medium" />
-
-                <TextView
-                    android:id="@+id/recentsRamStats"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="#B3FFFFFF"
-                    android:textSize="14sp"
-                    android:fontFamily="@string/font_regular" />
-            </LinearLayout>
+            android:layout_marginBottom="24dp"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/btnClearAll"
+                android:id="@+id/recentsTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:text="@string/kill_all_tasks"
+                android:text="@string/recent_apps_title"
                 android:textColor="#FFFFFFFF"
+                android:textSize="28sp"
+                android:fontFamily="@string/font_medium" />
+
+            <TextView
+                android:id="@+id/recentsRamStats"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#B3FFFFFF"
                 android:textSize="14sp"
-                android:fontFamily="@string/font_medium"
-                android:paddingStart="20dp"
-                android:paddingEnd="20dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:background="@drawable/settings_choice_bg"
-                android:focusable="true" />
-        </RelativeLayout>
+                android:fontFamily="@string/font_regular" />
+        </LinearLayout>
 
         <!-- Empty state -->
         <TextView
@@ -93,11 +69,30 @@
                 android:gravity="center_vertical" />
         </HorizontalScrollView>
 
+        <!-- Clear All Button placed below the apps row -->
         <TextView
+            android:id="@+id/btnClearAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/kill_all_tasks"
+            android:textColor="@drawable/pill_text"
+            android:textSize="14sp"
+            android:fontFamily="@string/font_medium"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/pill_bg"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
             android:text="Press OK to switch to app • Press UP or Kill to terminate and free RAM"
             android:textColor="#66FFFFFF"
             android:textSize="12sp"

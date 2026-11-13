@@ -88,6 +88,7 @@
     <string name="kill_app">Kill App</string>
     <string name="turbo_motion_state">Turbo motion (0.5x): %1$s</string>
     <string name="oled_mode_state">OLED pure black mode: %1$s</string>
+    <string name="adaptive_wallpaper_state">Dynamic wallpaper: %1$s</string>
     <string name="clock_style_state">Clock typography: %1$s</string>
     <string name="clock_style_minimal">Minimalist</string>
     <string name="clock_style_bold">Bold Typographic</string>

@@ -213,6 +213,7 @@ final class Config {
     final boolean oledMode;
     final boolean screenBlanker;
     final boolean doubleHomeSaver;
+    final boolean adaptiveWallpaper;
     final int clockStyle;
 
     private Config(List<String> dockApps, boolean fillDock, List<String> hiddenApps, List<String> libraryApps, String liveTvPackage,
@@ -228,7 +229,7 @@ final class Config {
                    List<RaceWeekend.Race> raceCalendar, boolean cinematicHome, boolean ambientGlow, boolean appGlow, boolean fadeRows, int homeIdleClockMinutes,
                    boolean keyFilter, boolean dockGlass, String glowStyle, boolean wallpaperCaptions,
                    boolean handleViewInputs, boolean tileMenu, boolean dockEvenPadding, boolean cinematicDots, boolean cinematicWhiteFocus, boolean wifiStatusColor, int cinematicScrim, int cinematicArt,
-                   Map<String, Set<String>> wallpaperMoods, boolean turboMotion, int clockStyle, boolean oledMode, boolean screenBlanker, boolean doubleHomeSaver) {
+                   Map<String, Set<String>> wallpaperMoods, boolean turboMotion, int clockStyle, boolean oledMode, boolean screenBlanker, boolean doubleHomeSaver, boolean adaptiveWallpaper) {
         this.handleViewInputs = handleViewInputs;
         this.tileMenu = tileMenu;
         this.inputKeycodes = inputKeycodes;
@@ -316,6 +317,7 @@ final class Config {
         this.oledMode = oledMode;
         this.screenBlanker = screenBlanker;
         this.doubleHomeSaver = doubleHomeSaver;
+        this.adaptiveWallpaper = adaptiveWallpaper;
         this.clockStyle = clockStyle;
     }
 
@@ -516,6 +518,7 @@ final class Config {
         boolean oledMode = choices.getBoolean("oled_mode", false);
         boolean screenBlanker = choices.getBoolean("screen_blanker", false);
         boolean doubleHomeSaver = choices.getBoolean("double_home_saver", true);
+        boolean adaptiveWallpaper = choices.getBoolean("adaptive_wallpaper", false);
         int chosenIdle = choices.getInt("home_idle_clock_minutes", idleClockMinutes);
         if (chosenIdle >= 0 && chosenIdle <= 1440) idleClockMinutes = chosenIdle;
         appKeys = applyButtonRemap(appKeys, choices, "remap_netflix", new int[]{191});
@@ -587,7 +590,7 @@ final class Config {
                 Math.max(0, Math.min(100, skyIntensity)), settingsKeycodes, settingsKeyPanel, restoreKeyServices, wallpaperEnabled, wallpaper,
                 wallpapers, rotationMinutes, wallpaperDim, dockOpacity, wallpaperOrder, applied,
                 festival, inputKeycodes, appKeys, stockHomeRedirect, json == null ? Collections.emptyList() : raceCalendar(json), cinematic, ambientGlow, appGlow, fadeRows,
-                Math.max(0, idleClockMinutes), keyFilter, dockGlass, glowStyle, wallpaperCaptions, handleViewInputs, tileMenu, dockEvenPadding, cinematicDots, cinematicWhiteFocus, wifiStatusColor, cinematicScrim, cinematicArt, wallpaperMoods, turboMotion, clockStyle, oledMode, screenBlanker, doubleHomeSaver);
+                Math.max(0, idleClockMinutes), keyFilter, dockGlass, glowStyle, wallpaperCaptions, handleViewInputs, tileMenu, dockEvenPadding, cinematicDots, cinematicWhiteFocus, wifiStatusColor, cinematicScrim, cinematicArt, wallpaperMoods, turboMotion, clockStyle, oledMode, screenBlanker, doubleHomeSaver, adaptiveWallpaper);
     }
 
     /**

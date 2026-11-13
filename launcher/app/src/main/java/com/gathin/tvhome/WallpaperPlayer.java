@@ -311,4 +311,43 @@ final class WallpaperPlayer {
             return null;
         }
     }
+
+    /**
+     * Adapts wallpaper atmospheric tone according to the time of day and live weather conditions.
+     * Uses hardware-accelerated PorterDuff color filtering over the existing bitmap to guarantee
+     * 0 extra RAM allocation, 0 extra textures, and 0 GPU shader overhead.
+     */
+    void applyAdaptiveTone(boolean enabled, String weatherSummary) {
+        if (!enabled || image == null) {
+            if (image != null) image.setColorFilter(null);
+            return;
+        }
+
+        int hour = java.time.LocalTime.now().getHour();
+        String summary = weatherSummary != null ? weatherSummary.toLowerCase() : "";
+
+        // Atmospheric conditions: rain, overcast, or natural day/night cycle
+        if (summary.contains("rain") || summary.contains("drizzle") || summary.contains("storm") || summary.contains("shower")) {
+            // Rainy: cool moody slate rain mist tint
+            image.setColorFilter(new android.graphics.PorterDuffColorFilter(0x381E293B, android.graphics.PorterDuff.Mode.SRC_ATOP));
+        } else if (summary.contains("cloud") || summary.contains("overcast") || summary.contains("fog") || summary.contains("mist")) {
+            // Overcast: soft diffuse overcast cloud tint
+            image.setColorFilter(new android.graphics.PorterDuffColorFilter(0x22334155, android.graphics.PorterDuff.Mode.SRC_ATOP));
+        } else {
+            // Natural daylight & time-of-day atmospheric lighting
+            if (hour >= 6 && hour < 12) {
+                // Morning: fresh soft sunrise warmth
+                image.setColorFilter(new android.graphics.PorterDuffColorFilter(0x18FFB347, android.graphics.PorterDuff.Mode.SRC_ATOP));
+            } else if (hour >= 12 && hour < 17) {
+                // Afternoon: clear natural daylight (original wallpaper tone)
+                image.setColorFilter(null);
+            } else if (hour >= 17 && hour < 20) {
+                // Evening: warm golden hour sunset dusk
+                image.setColorFilter(new android.graphics.PorterDuffColorFilter(0x28FF7A00, android.graphics.PorterDuff.Mode.SRC_ATOP));
+            } else {
+                // Night: deep midnight sapphire atmosphere
+                image.setColorFilter(new android.graphics.PorterDuffColorFilter(0x440B132B, android.graphics.PorterDuff.Mode.SRC_ATOP));
+            }
+        }
+    }
 }

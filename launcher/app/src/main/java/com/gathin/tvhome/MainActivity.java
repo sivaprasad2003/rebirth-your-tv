@@ -426,6 +426,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // the theme's background, so launch looks the same.
         getWindow().setBackgroundDrawable(null);
         wallpaperPlayer = new WallpaperPlayer(this, root, cfg);
+        updateAdaptiveWallpaperTone();
         if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
             handler.postDelayed(() -> {
                 if (!isFinishing() && !isDestroyed()
@@ -967,6 +968,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             }
         }
         wallpaperPlayer.start();
+        updateAdaptiveWallpaperTone();
         handler.postDelayed(minuteTick, MINUTE_MS);
         if (festive && diya != null) {
             diya.start();
@@ -2404,6 +2406,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     }
 
     private void updateGreeting() {
+        updateAdaptiveWallpaperTone();
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int res;
         // Locale-specific day parts (app language on Android 13+).
@@ -2825,6 +2828,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                         if (weatherText != null) {
                             weatherText.setText(result);
                             weatherText.setVisibility(View.VISIBLE);
+                            updateAdaptiveWallpaperTone();
                         }
                     });
                 }
@@ -2865,6 +2869,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             case 96:
             case 99: return "Thunderstorm";
             default: return "Cloudy";
+        }
+    }
+
+    private void updateAdaptiveWallpaperTone() {
+        if (wallpaperPlayer != null) {
+            boolean enabled = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
+                    .getBoolean("adaptive_wallpaper", false);
+            String weather = weatherText != null && weatherText.getVisibility() == View.VISIBLE
+                    ? weatherText.getText().toString() : null;
+            wallpaperPlayer.applyAdaptiveTone(enabled, weather);
         }
     }
 

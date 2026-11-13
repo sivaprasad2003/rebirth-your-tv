@@ -52,6 +52,7 @@ public final class LauncherSettingsActivity extends Activity {
     private TextView clockStyleChoice;
     private TextView screenBlankerChoice;
     private TextView doubleHomeSaverChoice;
+    private TextView adaptiveWallpaperChoice;
     private TextView remapNetflixChoice;
     private TextView remapPrimeChoice;
     private TextView remapHotstarChoice;
@@ -76,6 +77,7 @@ public final class LauncherSettingsActivity extends Activity {
     private boolean oledMode;
     private boolean screenBlanker;
     private boolean doubleHomeSaver;
+    private boolean adaptiveWallpaper;
     private int clockStyle;
     private boolean fadeRows;
     private boolean settingsKeyPanel;
@@ -307,6 +309,14 @@ public final class LauncherSettingsActivity extends Activity {
         doubleHomeSaverChoice.setOnClickListener(v -> {
             doubleHomeSaver = !doubleHomeSaver;
             choices.edit().putBoolean("double_home_saver", doubleHomeSaver).apply();
+            changed();
+            refresh();
+        });
+        adaptiveWallpaper = choices.getBoolean("adaptive_wallpaper", false);
+        adaptiveWallpaperChoice = findViewById(R.id.adaptiveWallpaperChoice);
+        adaptiveWallpaperChoice.setOnClickListener(v -> {
+            adaptiveWallpaper = !adaptiveWallpaper;
+            choices.edit().putBoolean("adaptive_wallpaper", adaptiveWallpaper).apply();
             changed();
             refresh();
         });
@@ -625,6 +635,8 @@ public final class LauncherSettingsActivity extends Activity {
                 getString(screenBlanker ? R.string.on : R.string.off)));
         doubleHomeSaverChoice.setText(getString(R.string.double_home_saver_state,
                 getString(doubleHomeSaver ? R.string.on : R.string.off)));
+        adaptiveWallpaperChoice.setText(getString(R.string.adaptive_wallpaper_state,
+                getString(adaptiveWallpaper ? R.string.on : R.string.off)));
         remapNetflixChoice.setText(getString(R.string.remap_netflix_format,
                 getAppLabel(choices.getString("remap_netflix", null))));
         remapPrimeChoice.setText(getString(R.string.remap_prime_format,

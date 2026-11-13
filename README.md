@@ -534,6 +534,7 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Cinematic top shelf**: expands the focused app backdrop into a cinematic visual header.
   - **Turbo motion (0.5x)**: ultra-snappy 0.5x duration curves and instant transitions for budget TV chipsets.
   - **OLED pure black mode**: 0-nit absolute true-black display mode with disabled ambient backdrops to eliminate burn-in risk.
+  - **Dynamic wallpaper**: adapt wallpaper tone dynamically according to time of day (morning, day, evening, night) and live weather (rain, clouds, clear).
   - **System stats (CPU/RAM)**: shows real-time CPU load, free RAM, and storage in the header.
   - **Bluetooth pill**: quick status pill showing paired Bluetooth audio devices and remotes.
   - **Inputs pill**: fast input switcher showing HDMI 1, HDMI 2, AV, and Live TV ports.

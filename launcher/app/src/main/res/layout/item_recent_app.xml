@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="16dp"
     android:orientation="vertical"
-    android:background="@drawable/settings_choice_bg"
+    android:background="@drawable/recent_card_bg"
     android:padding="16dp"
     android:focusable="true"
     android:gravity="center_horizontal">
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Active in RAM"
-        android:textColor="#80FFFFFF"
+        android:textColor="#B3FFFFFF"
         android:textSize="11sp"
         android:fontFamily="@string/font_regular"
         android:layout_marginBottom="12dp" />
@@ -43,11 +43,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/kill_app"
-        android:textColor="#E2E8F0"
+        android:textColor="@drawable/pill_text"
         android:textSize="12sp"
         android:fontFamily="@string/font_medium"
         android:background="@drawable/pill_bg"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:focusable="false" />
 </LinearLayout>

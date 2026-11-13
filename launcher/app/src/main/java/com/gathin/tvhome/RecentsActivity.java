@@ -23,6 +23,7 @@ public final class RecentsActivity extends Activity {
     private TextView ramStats;
     private LinearLayout container;
     private View emptyText;
+    private View btnClearAll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,13 @@ public final class RecentsActivity extends Activity {
         ramStats = findViewById(R.id.recentsRamStats);
         container = findViewById(R.id.recentsContainer);
         emptyText = findViewById(R.id.emptyRecentsText);
+        btnClearAll = findViewById(R.id.btnClearAll);
 
-        findViewById(R.id.btnClearAll).setOnClickListener(v -> {
+        btnClearAll.setOnClickListener(v -> {
             RecentApps.killAll(this);
             container.removeAllViews();
             emptyText.setVisibility(View.VISIBLE);
+            btnClearAll.setVisibility(View.GONE);
             updateRamStats();
             v.postDelayed(this::updateRamStats, 400);
             v.postDelayed(this::updateRamStats, 1000);
@@ -64,9 +67,11 @@ public final class RecentsActivity extends Activity {
         List<RecentApps.Entry> entries = RecentApps.getRecentEntries(this);
         if (entries.isEmpty()) {
             emptyText.setVisibility(View.VISIBLE);
+            if (btnClearAll != null) btnClearAll.setVisibility(View.GONE);
             return;
         }
         emptyText.setVisibility(View.GONE);
+        if (btnClearAll != null) btnClearAll.setVisibility(View.VISIBLE);
 
         for (RecentApps.Entry entry : entries) {
             View card = getLayoutInflater().inflate(R.layout.item_recent_app, container, false);
@@ -112,6 +117,7 @@ public final class RecentsActivity extends Activity {
             container.removeView(card);
             if (container.getChildCount() == 0) {
                 emptyText.setVisibility(View.VISIBLE);
+                if (btnClearAll != null) btnClearAll.setVisibility(View.GONE);
             } else {
                 container.getChildAt(0).requestFocus();
             }
