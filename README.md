@@ -542,7 +542,7 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Icon-only header buttons**: minimalist circular icon buttons for clean top bar aesthetics.
   - **Fade rows under clock**: subtle vertical fade gradient behind bottom app rows.
   - **Settings key**: choose whether the remote settings key opens the Quick Panel or TV System Settings.
-  - **Recent apps (Task Manager)**: switch between active applications or kill background processes to free RAM.
+  - **Recent apps**: switch between active applications or kill background processes to free RAM.
   - **Tile context menu**: long-press OK on any app tile to open options (Move, Hide, Uninstall).
   - **Screensaver idle timeout**: set screensaver sleep timer (Off, 5, 10, 15, 30 minutes, or Test now).
   - **Clock typography**: ambient clock font styling (Minimalist, Bold Typographic, Retro Digital) for Home and screensaver.

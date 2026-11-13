@@ -39,6 +39,8 @@ public final class RecentsActivity extends Activity {
             container.removeAllViews();
             emptyText.setVisibility(View.VISIBLE);
             updateRamStats();
+            v.postDelayed(this::updateRamStats, 400);
+            v.postDelayed(this::updateRamStats, 1000);
             Toast.makeText(this, R.string.all_tasks_killed, Toast.LENGTH_SHORT).show();
         });
 
@@ -114,6 +116,10 @@ public final class RecentsActivity extends Activity {
                 container.getChildAt(0).requestFocus();
             }
             updateRamStats();
+            if (ramStats != null) {
+                ramStats.postDelayed(this::updateRamStats, 400);
+                ramStats.postDelayed(this::updateRamStats, 1000);
+            }
         }).start();
         Toast.makeText(this, getString(R.string.task_killed, entry.label), Toast.LENGTH_SHORT).show();
     }

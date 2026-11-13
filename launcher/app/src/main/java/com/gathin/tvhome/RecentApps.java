@@ -116,6 +116,20 @@ final class RecentApps {
         ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
         if (am != null) {
             am.killBackgroundProcesses(pkg);
+            try {
+                List<ActivityManager.RunningAppProcessInfo> procs = am.getRunningAppProcesses();
+                if (procs != null) {
+                    for (ActivityManager.RunningAppProcessInfo p : procs) {
+                        if (p.pkgList != null) {
+                            for (String pPkg : p.pkgList) {
+                                if (pkg.equals(pPkg)) {
+                                    am.killBackgroundProcesses(pPkg);
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ignored) {}
         }
         SharedPreferences prefs = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         String raw = prefs.getString(KEY_RECENTS, "");
@@ -128,16 +142,34 @@ final class RecentApps {
 
     static void killAll(Context ctx) {
         ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
-        SharedPreferences prefs = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        String raw = prefs.getString(KEY_RECENTS, "");
-        if (!raw.isEmpty()) {
-            String[] pkgs = raw.split(",");
-            if (am != null) {
+        if (am != null) {
+            try {
+                List<ActivityManager.RunningAppProcessInfo> procs = am.getRunningAppProcesses();
+                if (procs != null) {
+                    for (ActivityManager.RunningAppProcessInfo p : procs) {
+                        if (p.pkgList != null) {
+                            for (String pkg : p.pkgList) {
+                                if (!pkg.equals(ctx.getPackageName())) {
+                                    am.killBackgroundProcesses(pkg);
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ignored) {}
+            SharedPreferences prefs = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+            String raw = prefs.getString(KEY_RECENTS, "");
+            if (!raw.isEmpty()) {
+                String[] pkgs = raw.split(",");
                 for (String pkg : pkgs) {
-                    am.killBackgroundProcesses(pkg.trim());
+                    pkg = pkg.trim();
+                    if (!pkg.isEmpty() && !pkg.equals(ctx.getPackageName())) {
+                        am.killBackgroundProcesses(pkg);
+                    }
                 }
             }
         }
+        SharedPreferences prefs = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         prefs.edit().remove(KEY_RECENTS).apply();
     }
 }

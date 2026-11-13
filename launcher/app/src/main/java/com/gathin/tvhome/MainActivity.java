@@ -305,7 +305,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         public void onAvailable(@NonNull Network network) {
             handler.post(() -> {
                 updateWifiLabel();
-                fetchLiveWeather();
+                if (weatherText != null && weatherText.getVisibility() == View.VISIBLE) {
+                    fetchLiveWeather();
+                }
             });
         }
 
@@ -488,10 +490,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             if (cached != null && !cached.isEmpty()) {
                 weatherText.setText(cached);
                 weatherText.setVisibility(View.VISIBLE);
+                fetchLiveWeather();
             } else {
                 weatherText.setVisibility(View.GONE);
             }
-            fetchLiveWeather();
         }
         weatherReceiver = new BroadcastReceiver() {
             @Override
@@ -2715,8 +2717,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private long lastWeatherFetch;
 
     private void fetchLiveWeather() {
-        lastWeatherFetch = System.currentTimeMillis();
-        Executors.newSingleThreadExecutor().execute(() -> {
+        if (weatherText == null || weatherText.getVisibility() != View.VISIBLE) return;
+        long now = System.currentTimeMillis();
+        if (now - lastWeatherFetch < 30 * 60 * 1000L) return;
+        lastWeatherFetch = now;
+        java.util.concurrent.ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
             try {
                 String cityName = null;
                 double lat = 0, lon = 0;
@@ -2823,7 +2829,10 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                     });
                 }
                 conn.disconnect();
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            } finally {
+                executor.shutdown();
+            }
         });
     }
 
