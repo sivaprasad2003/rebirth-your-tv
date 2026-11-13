@@ -1248,17 +1248,29 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if (doubleHomeSaver && (event.getKeyCode() == KeyEvent.KEYCODE_HOME || event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS)) {
-            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
-                long now = SystemClock.uptimeMillis();
-                if (now - lastHomePressTime <= DOUBLE_PRESS_INTERVAL_MS) {
-                    lastHomePressTime = 0;
-                    Intent saver = new Intent(this, ClockActivity.class);
-                    saver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(saver);
+        if (event.getKeyCode() == KeyEvent.KEYCODE_HOME || event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (event.isLongPress() || (event.getFlags() & KeyEvent.FLAG_LONG_PRESS) != 0) {
+                    Intent recents = new Intent(this, RecentsActivity.class);
+                    recents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    try {
+                        startActivity(recents);
+                    } catch (Exception ignored) {}
                     return true;
                 }
-                lastHomePressTime = now;
+                event.startTracking();
+            } else if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                if (doubleHomeSaver) {
+                    long now = SystemClock.uptimeMillis();
+                    if (now - lastHomePressTime <= DOUBLE_PRESS_INTERVAL_MS) {
+                        lastHomePressTime = 0;
+                        Intent saver = new Intent(this, ClockActivity.class);
+                        saver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(saver);
+                        return true;
+                    }
+                    lastHomePressTime = now;
+                }
             }
         }
         if (handleSettingsKey(event)) return true;
@@ -2922,7 +2934,25 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         }
     }
 
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_HOME || keyCode == KeyEvent.KEYCODE_ALL_APPS) {
+            Intent recents = new Intent(this, RecentsActivity.class);
+            recents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            try {
+                startActivity(recents);
+            } catch (Exception ignored) {}
+            return true;
+        }
+        return super.onKeyLongPress(keyCode, event);
+    }
+
     private void open(Intent i) {
+        if (i.getComponent() != null && i.getComponent().getPackageName() != null) {
+            RecentApps.record(this, i.getComponent().getPackageName());
+        } else if (i.getPackage() != null) {
+            RecentApps.record(this, i.getPackage());
+        }
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         try {
             startActivity(i);

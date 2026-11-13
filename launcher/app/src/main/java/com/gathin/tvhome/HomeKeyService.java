@@ -39,6 +39,8 @@ public class HomeKeyService extends AccessibilityService {
     /** Remote buttons that should open Settings (config.xml, settings_key_scancodes and settings_key_keycodes). */
     private int[] settingsScancodes = new int[0];
     private int[] settingsKeycodes = new int[0];
+    private long homeKeyDownTime = 0;
+    private boolean homeLongPressTriggered = false;
     private boolean settingsPanel;
     /** app_keys, the same maps InputKeyService reads, for setups that run only this service. */
     private Map<Integer, String> appKeys = Collections.emptyMap();
@@ -148,15 +150,40 @@ public class HomeKeyService extends AccessibilityService {
         }
         if (RemoteKeys.handle(this, event, appKeys.get(event.getKeyCode()),
                 holdAppKeys.get(event.getKeyCode()))) return true;
-        if (event.getKeyCode() != KeyEvent.KEYCODE_ALL_APPS) return false;
-        if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
-            Intent home = new Intent(Intent.ACTION_MAIN)
-                    .addCategory(Intent.CATEGORY_HOME)
-                    .setPackage(getPackageName())
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            startActivity(home);
+        if (event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (event.getRepeatCount() == 0) {
+                    homeKeyDownTime = android.os.SystemClock.uptimeMillis();
+                    homeLongPressTriggered = false;
+                } else if (event.getRepeatCount() > 0 && !homeLongPressTriggered) {
+                    if (android.os.SystemClock.uptimeMillis() - homeKeyDownTime >= 450) {
+                        homeLongPressTriggered = true;
+                        Intent recents = new Intent(this, RecentsActivity.class);
+                        recents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        try {
+                            startActivity(recents);
+                        } catch (Exception ignored) {}
+                        return true;
+                    }
+                }
+            } else if (event.getAction() == KeyEvent.ACTION_UP) {
+                if (homeLongPressTriggered) {
+                    homeLongPressTriggered = false;
+                    return true;
+                }
+                homeKeyDownTime = 0;
+                if (event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS && !event.isCanceled()) {
+                    Intent home = new Intent(Intent.ACTION_MAIN)
+                            .addCategory(Intent.CATEGORY_HOME)
+                            .setPackage(getPackageName())
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                    startActivity(home);
+                    return true;
+                }
+            }
+            if (event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS) return true;
         }
-        return true;
+        return false;
     }
 
     /** Unbound by Android: the user turned the helper off, so Home doesn't put it back (ServiceRepair). */

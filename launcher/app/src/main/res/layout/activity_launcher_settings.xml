@@ -202,7 +202,7 @@
                 android:layout_marginTop="10dp" />
 
             <TextView
-                android:id="@+id/festivalChoice"
+                android:id="@+id/recentAppsChoice"
                 style="@style/SettingsRow"
                 android:layout_marginTop="10dp" />
 

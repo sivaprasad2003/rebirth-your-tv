@@ -59,6 +59,7 @@ Smart TVs today ship with heavy, ad-ridden interfaces that degrade performance r
 14. **🌙 Burn-in Safe Screensaver with Live Weather:** Ambient drift clock screensaver that shows real-time weather, temperature, and city name (e.g. `New York 22°C · Clear`) below date and time.
 15. **🎨 Glassmorphic TV Settings:** Modern card-based Leanback settings with mint/emerald focus halos for intuitive D-pad navigation.
 16. **🖼️ Boot-Persistent Wallpaper Engine:** Internal image cache keeps custom 4K/1080p wallpapers loaded instantly on TV power-up.
+17. **📱 Recent Apps & RAM Killer:** Long-press Home button opens the Leanback task switcher to flip between recent apps, inspect live RAM availability, and terminate background tasks with D-pad UP or 1-click "Clear All".
 
 ---
 
@@ -108,6 +109,7 @@ Smart TVs today ship with heavy, ad-ridden interfaces that degrade performance r
 | **Weak Chipset Tuning** | Unusable sluggish lag | **Turbo Motion (0.5x Curves, 900f Springs)** |
 | **OLED Protection** | Static UI burn-in risk | **0-Nit True-Black OLED Pure Mode** |
 | **Audio-Only Screen Off** | Buried in 5 submenus | **1-Click Screen Blanker (Music Keeps Playing)** |
+| **Recent Apps & RAM Cleaner** | No task switcher / Cannot kill apps | **Long-Press Home Switcher + 1-Click Clear All** |
 | **Quick App Management** | Deep settings navigation | **Long-Press Quick Actions (App Info & Uninstall)** |
 | **Clock Customization** | Locked default font | **Minimalist / Bold / Retro Digital Styles** |
 | **Hardware Auto-Detection** | Manual trial & error | **Smart Auto-Detector (`tools/quick_debloat.sh`)** |
@@ -540,6 +542,7 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Icon-only header buttons**: minimalist circular icon buttons for clean top bar aesthetics.
   - **Fade rows under clock**: subtle vertical fade gradient behind bottom app rows.
   - **Settings key**: choose whether the remote settings key opens the Quick Panel or TV System Settings.
+  - **Recent apps (Task Manager)**: switch between active applications or kill background processes to free RAM.
   - **Tile context menu**: long-press OK on any app tile to open options (Move, Hide, Uninstall).
   - **Screensaver idle timeout**: set screensaver sleep timer (Off, 5, 10, 15, 30 minutes, or Test now).
   - **Clock typography**: ambient clock font styling (Minimalist, Bold Typographic, Retro Digital) for Home and screensaver.

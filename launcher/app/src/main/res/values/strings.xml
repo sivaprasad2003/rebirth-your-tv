@@ -77,6 +77,15 @@
     <string name="settings_key_panel_quick">Quick Glass Panel</string>
     <string name="tile_menu_state">Tile context menu: %1$s</string>
     <string name="action_uninstall">Uninstall</string>
+    <string name="recent_apps_title">Recent apps (Task Manager)</string>
+    <string name="recent_apps_state">Recent apps (Task Manager)</string>
+    <string name="kill_all_tasks">Clear All</string>
+    <string name="ram_status">Available Memory: %1$d MB / %2$d MB</string>
+    <string name="no_recent_apps">No recent background apps running</string>
+    <string name="task_killed">%1$s terminated • RAM freed</string>
+    <string name="all_tasks_killed">All background apps cleared • RAM freed</string>
+    <string name="switch_to_app">Switch To</string>
+    <string name="kill_app">Kill App</string>
     <string name="turbo_motion_state">Turbo motion (0.5x): %1$s</string>
     <string name="oled_mode_state">OLED pure black mode: %1$s</string>
     <string name="clock_style_state">Clock typography: %1$s</string>

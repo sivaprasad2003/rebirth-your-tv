@@ -46,6 +46,7 @@ public final class LauncherSettingsActivity extends Activity {
     private TextView oledModeChoice;
     private TextView fadeRowsChoice;
     private TextView settingsKeyPanelChoice;
+    private TextView recentAppsChoice;
     private TextView tileMenuChoice;
     private TextView screensaverChoice;
     private TextView clockStyleChoice;
@@ -273,6 +274,8 @@ public final class LauncherSettingsActivity extends Activity {
             changed();
             refresh();
         });
+        recentAppsChoice = findViewById(R.id.recentAppsChoice);
+        recentAppsChoice.setOnClickListener(v -> startActivity(new Intent(this, RecentsActivity.class)));
         tileMenuChoice = findViewById(R.id.tileMenuChoice);
         tileMenuChoice.setOnClickListener(v -> {
             tileMenu = !tileMenu;
@@ -603,6 +606,7 @@ public final class LauncherSettingsActivity extends Activity {
                 getString(fadeRows ? R.string.on : R.string.off)));
         settingsKeyPanelChoice.setText(getString(R.string.settings_key_panel_state,
                 getString(settingsKeyPanel ? R.string.settings_key_panel_quick : R.string.settings_key_panel_system)));
+        recentAppsChoice.setText(getString(R.string.recent_apps_title));
         tileMenuChoice.setText(getString(R.string.tile_menu_state,
                 getString(tileMenu ? R.string.on : R.string.off)));
         int idleMins = choices.getInt("home_idle_clock_minutes", 10);
