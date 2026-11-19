@@ -30,14 +30,18 @@ public final class RecentsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recents);
 
-        findViewById(R.id.recentsScrim).setOnClickListener(v -> finish());
+        View scrim = findViewById(R.id.recentsScrim);
+        scrim.setOnClickListener(v -> finish());
+        int panelOpacity = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE).getInt("panel_opacity", 75);
+        int alpha = Math.max(0, Math.min(255, (panelOpacity * 255) / 100));
+        scrim.setBackgroundColor((alpha << 24) | 0x080C14);
         ramStats = findViewById(R.id.recentsRamStats);
         container = findViewById(R.id.recentsContainer);
         emptyText = findViewById(R.id.emptyRecentsText);
         btnClearAll = findViewById(R.id.btnClearAll);
 
         btnClearAll.setOnClickListener(v -> {
-            RecentApps.killAll(this);
+            RecentApps.killAll(this, RecentApps.getRecentEntries(this));
             container.removeAllViews();
             emptyText.setVisibility(View.VISIBLE);
             btnClearAll.setVisibility(View.GONE);
@@ -77,13 +81,24 @@ public final class RecentsActivity extends Activity {
             View card = getLayoutInflater().inflate(R.layout.item_recent_app, container, false);
             ((ImageView) card.findViewById(R.id.appIcon)).setImageDrawable(entry.icon);
             ((TextView) card.findViewById(R.id.appLabel)).setText(entry.label);
+            TextView appStatus = card.findViewById(R.id.appStatus);
+            if (appStatus != null) {
+                if (entry.ramMb > 0) {
+                    appStatus.setText(entry.ramMb + " MB");
+                    appStatus.setVisibility(View.VISIBLE);
+                } else {
+                    appStatus.setVisibility(View.GONE);
+                }
+            }
 
             // Click / OK: Switch to app
             card.setOnClickListener(v -> {
-                Intent launch = getPackageManager().getLaunchIntentForPackage(entry.packageName);
+                Intent launch = getPackageManager().getLeanbackLaunchIntentForPackage(entry.packageName);
+                if (launch == null) launch = getPackageManager().getLaunchIntentForPackage(entry.packageName);
                 if (launch != null) {
                     finish();
                     try {
+                        launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(launch);
                     } catch (Exception e) {
                         Toast.makeText(this, R.string.not_available, Toast.LENGTH_SHORT).show();

@@ -1252,9 +1252,35 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        int recentTrigger = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
+                .getInt("recent_apps_trigger", 0);
+        if (recentTrigger == 0 && (event.getKeyCode() == 192 || event.getKeyCode() == KeyEvent.KEYCODE_BUTTON_5)) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                startActivity(new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+            return true;
+        }
+        if (recentTrigger == 2 && (event.getKeyCode() == KeyEvent.KEYCODE_TV || event.getKeyCode() == 170)) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                startActivity(new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+            return true;
+        }
+        if (recentTrigger == 3 && event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                startActivity(new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+            return true;
+        }
+        if (recentTrigger == 4 && event.getKeyCode() == KeyEvent.KEYCODE_GUIDE) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                startActivity(new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+            return true;
+        }
         if (event.getKeyCode() == KeyEvent.KEYCODE_HOME || event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS) {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                if (event.isLongPress() || (event.getFlags() & KeyEvent.FLAG_LONG_PRESS) != 0) {
+                if (recentTrigger == 1 && (event.isLongPress() || (event.getFlags() & KeyEvent.FLAG_LONG_PRESS) != 0)) {
                     Intent recents = new Intent(this, RecentsActivity.class);
                     recents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     try {
@@ -2959,7 +2985,9 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
 
     @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_HOME || keyCode == KeyEvent.KEYCODE_ALL_APPS) {
+        int recentTrigger = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
+                .getInt("recent_apps_trigger", 0);
+        if (recentTrigger == 1 && (keyCode == KeyEvent.KEYCODE_HOME || keyCode == KeyEvent.KEYCODE_ALL_APPS)) {
             Intent recents = new Intent(this, RecentsActivity.class);
             recents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             try {

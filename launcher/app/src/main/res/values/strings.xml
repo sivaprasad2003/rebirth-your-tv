@@ -89,6 +89,13 @@
     <string name="turbo_motion_state">Turbo motion (0.5x): %1$s</string>
     <string name="oled_mode_state">OLED pure black mode: %1$s</string>
     <string name="adaptive_wallpaper_state">Dynamic wallpaper: %1$s</string>
+    <string name="panel_opacity_state">Glass overlay opacity: %1$s</string>
+    <string name="recent_apps_trigger_state">Recent apps button: %1$s</string>
+    <string name="recent_trigger_patchwall">PatchWall (Xiaomi)</string>
+    <string name="recent_trigger_hold_home">Long-press Home</string>
+    <string name="recent_trigger_livetv">Live TV key</string>
+    <string name="recent_trigger_menu">Menu key</string>
+    <string name="recent_trigger_guide">Guide key</string>
     <string name="clock_style_state">Clock typography: %1$s</string>
     <string name="clock_style_minimal">Minimalist</string>
     <string name="clock_style_bold">Bold Typographic</string>

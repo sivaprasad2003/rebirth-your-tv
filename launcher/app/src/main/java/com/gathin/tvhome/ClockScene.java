@@ -1,12 +1,14 @@
 package com.gathin.tvhome;
 
 import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -30,6 +32,7 @@ final class ClockScene {
     private final View content;
     private final TextView weatherView;
     private final GradientDrawable glow;
+    private ValueAnimator glowAnimator;
     private int colorIndex;
     private int glowColor;
 
@@ -50,9 +53,10 @@ final class ClockScene {
         View ambient = root.findViewById(R.id.dreamAmbient);
         glow = new GradientDrawable();
         glow.setGradientType(GradientDrawable.RADIAL_GRADIENT);
+        glow.setDither(true);
         ambient.setBackground(glow);
         ambient.addOnLayoutChangeListener((v, l, t, r, b, ol, ot, or, ob) ->
-                glow.setGradientRadius((r - l) * 0.55f));
+                glow.setGradientRadius((r - l) * 0.75f));
         colorIndex = random.nextInt(PALETTE.length);
         setGlow(PALETTE[colorIndex]);
         updateWeather();
@@ -76,6 +80,10 @@ final class ClockScene {
 
     void stop() {
         handler.removeCallbacksAndMessages(null);   // the tick and any glow steps still queued
+        if (glowAnimator != null) {
+            glowAnimator.cancel();
+            glowAnimator = null;
+        }
         content.animate().cancel();
     }
 
@@ -123,19 +131,31 @@ final class ClockScene {
     }
 
     private void shiftGlow() {
+        if (glowAnimator != null) glowAnimator.cancel();
         int from = glowColor;
         colorIndex = (colorIndex + 1) % PALETTE.length;
         int to = PALETTE[colorIndex];
         ArgbEvaluator mix = new ArgbEvaluator();
-        for (int i = 1; i <= GLOW_STEPS; i++) {
-            float f = (float) i / GLOW_STEPS;
-            handler.postDelayed(() -> setGlow((int) mix.evaluate(f, from, to)), i * GLOW_STEP_MS);
-        }
+        glowAnimator = ValueAnimator.ofFloat(0f, 1f);
+        glowAnimator.setDuration(4000L);
+        glowAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        glowAnimator.addUpdateListener(anim -> {
+            float f = (float) anim.getAnimatedValue();
+            setGlow((int) mix.evaluate(f, from, to));
+        });
+        glowAnimator.start();
     }
 
     private void setGlow(int color) {
         glowColor = color;
         int c = color & 0x00FFFFFF;
-        glow.setColors(new int[]{0x40000000 | c, 0x14000000 | c, 0x00000000 | c});
+        glow.setColors(new int[]{
+            0x24000000 | c,
+            0x18000000 | c,
+            0x0E000000 | c,
+            0x06000000 | c,
+            0x02000000 | c,
+            0x00000000 | c
+        });
     }
 }

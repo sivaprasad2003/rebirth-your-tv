@@ -113,9 +113,8 @@ public class HomeKeyService extends AccessibilityService {
                 stockHome.add(ri.activityInfo.name);
             }
         }
-        // home_key_service.xml subscribes to no events, so the redirect asks for window changes only when it is on.
         AccessibilityServiceInfo info = getServiceInfo();
-        if (info != null && !stockHome.isEmpty()) {
+        if (info != null) {
             info.eventTypes |= AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED;
             setServiceInfo(info);
         }
@@ -148,6 +147,36 @@ public class HomeKeyService extends AccessibilityService {
             }
             return true;
         }
+        int recentTrigger = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
+                .getInt("recent_apps_trigger", 0);
+        if (recentTrigger == 0 && (event.getKeyCode() == 192 || event.getKeyCode() == KeyEvent.KEYCODE_BUTTON_5)) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
+        if (recentTrigger == 2 && (event.getKeyCode() == KeyEvent.KEYCODE_TV || event.getKeyCode() == 170)) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
+        if (recentTrigger == 3 && event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
+        if (recentTrigger == 4 && event.getKeyCode() == KeyEvent.KEYCODE_GUIDE) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
         if (RemoteKeys.handle(this, event, appKeys.get(event.getKeyCode()),
                 holdAppKeys.get(event.getKeyCode()))) return true;
         if (event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS || event.getKeyCode() == KeyEvent.KEYCODE_HOME) {
@@ -156,7 +185,7 @@ public class HomeKeyService extends AccessibilityService {
                     homeKeyDownTime = android.os.SystemClock.uptimeMillis();
                     homeLongPressTriggered = false;
                 } else if (event.getRepeatCount() > 0 && !homeLongPressTriggered) {
-                    if (android.os.SystemClock.uptimeMillis() - homeKeyDownTime >= 450) {
+                    if (recentTrigger == 1 && android.os.SystemClock.uptimeMillis() - homeKeyDownTime >= 450) {
                         homeLongPressTriggered = true;
                         Intent recents = new Intent(this, RecentsActivity.class);
                         recents.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -195,6 +224,15 @@ public class HomeKeyService extends AccessibilityService {
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+        if (event.getEventType() == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            CharSequence pkgName = event.getPackageName();
+            if (pkgName != null) {
+                String pkg = pkgName.toString();
+                if (!pkg.equals(getPackageName()) && !RecentApps.isExcluded(pkg)) {
+                    RecentApps.record(this, pkg);
+                }
+            }
+        }
         // stock_home_redirect: the firmware turned the stock launcher back on and its home screen came up.
         if (stockHome.isEmpty() || event.getEventType() != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return;
         CharSequence cls = event.getClassName();

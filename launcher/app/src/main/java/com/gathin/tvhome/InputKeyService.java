@@ -59,6 +59,36 @@ public class InputKeyService extends AccessibilityService {
 
     @Override
     protected boolean onKeyEvent(KeyEvent event) {
+        int recentTrigger = getSharedPreferences(Config.SETTINGS_NAME, MODE_PRIVATE)
+                .getInt("recent_apps_trigger", 0);
+        if (recentTrigger == 0 && (event.getKeyCode() == 192 || event.getKeyCode() == KeyEvent.KEYCODE_BUTTON_5)) {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
+        if (recentTrigger == 2 && (event.getKeyCode() == KeyEvent.KEYCODE_TV || event.getKeyCode() == 170)) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
+        if (recentTrigger == 3 && event.getKeyCode() == KeyEvent.KEYCODE_MENU) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
+        if (recentTrigger == 4 && event.getKeyCode() == KeyEvent.KEYCODE_GUIDE) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent recents = new Intent(this, RecentsActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { startActivity(recents); } catch (Exception ignored) {}
+            }
+            return true;
+        }
         // A scancode entry is more specific than any keycode, so it goes first.
         if (RemoteKeys.handle(this, event, appScancodes.get(event.getScanCode()),
                 holdAppScancodes.get(event.getScanCode()))) return true;

@@ -535,6 +535,7 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
   - **Turbo motion (0.5x)**: ultra-snappy 0.5x duration curves and instant transitions for budget TV chipsets.
   - **OLED pure black mode**: 0-nit absolute true-black display mode with disabled ambient backdrops to eliminate burn-in risk.
   - **Dynamic wallpaper**: adapt wallpaper tone dynamically according to time of day (morning, day, evening, night) and live weather (rain, clouds, clear).
+  - **Glass overlay opacity**: adjust glass backdrop opacity (100%, 75%, 50%, 25%) for Settings and Recent apps.
   - **System stats (CPU/RAM)**: shows real-time CPU load, free RAM, and storage in the header.
   - **Bluetooth pill**: quick status pill showing paired Bluetooth audio devices and remotes.
   - **Inputs pill**: fast input switcher showing HDMI 1, HDMI 2, AV, and Live TV ports.
@@ -555,6 +556,7 @@ powershell -ExecutionPolicy Bypass -File launcher\build-and-install.ps1 -TvHost 
     - **JioHotstar button**: remap to any app.
     - **Sony LIV button**: remap to any app.
     - **Live TV button**: remap to your preferred live streaming or TV app.
+    - **Recent apps button**: assign shortcut button (PatchWall on Xiaomi, Long-press Home, Live TV key, Menu, Guide) to open recent apps.
   - **Follow theme (reset on-TV choices)**, which clears every choice above. Pushing or resetting a theme clears them too.
   - **Choose default home** opens Android's home picker, and **TV system settings** the TV's own settings page.
 - **Change the default home:** Launcher settings and the optional Default-home tile (`show_home_settings_shortcut`) open Android's home picker. Choose the original launcher to stop using RebirthYourTV as Home, or RebirthYourTV to return.

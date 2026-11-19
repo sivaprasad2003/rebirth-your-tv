@@ -53,15 +53,18 @@ public final class LauncherSettingsActivity extends Activity {
     private TextView screenBlankerChoice;
     private TextView doubleHomeSaverChoice;
     private TextView adaptiveWallpaperChoice;
+    private TextView panelOpacityChoice;
     private TextView remapNetflixChoice;
     private TextView remapPrimeChoice;
     private TextView remapHotstarChoice;
     private TextView remapSonyLivChoice;
     private TextView remapLiveTvChoice;
+    private TextView recentAppsTriggerChoice;
     private TextView followThemeChoice;
     private int columns;
     private int rowsBelowDock;
     private int dockOpacity;
+    private int recentAppsTrigger;
     private boolean animations;
     private boolean advancedEffects;
     private boolean ambientGlow;
@@ -79,6 +82,7 @@ public final class LauncherSettingsActivity extends Activity {
     private boolean doubleHomeSaver;
     private boolean adaptiveWallpaper;
     private int clockStyle;
+    private int panelOpacity;
     private boolean fadeRows;
     private boolean settingsKeyPanel;
     private boolean tileMenu;
@@ -320,6 +324,20 @@ public final class LauncherSettingsActivity extends Activity {
             changed();
             refresh();
         });
+        panelOpacity = choices.getInt("panel_opacity", 75);
+        View settingsRoot = findViewById(R.id.settingsRoot);
+        if (settingsRoot != null) settingsRoot.setBackgroundColor(getScrimColor(panelOpacity));
+        panelOpacityChoice = findViewById(R.id.panelOpacityChoice);
+        panelOpacityChoice.setOnClickListener(v -> {
+            if (panelOpacity == 75) panelOpacity = 50;
+            else if (panelOpacity == 50) panelOpacity = 25;
+            else if (panelOpacity == 25) panelOpacity = 100;
+            else panelOpacity = 75;
+            choices.edit().putInt("panel_opacity", panelOpacity).apply();
+            if (settingsRoot != null) settingsRoot.setBackgroundColor(getScrimColor(panelOpacity));
+            changed();
+            refresh();
+        });
         remapNetflixChoice = findViewById(R.id.remapNetflixChoice);
         remapNetflixChoice.setOnClickListener(v -> showAppPicker("remap_netflix", R.string.remap_netflix_label));
         remapPrimeChoice = findViewById(R.id.remapPrimeChoice);
@@ -330,6 +348,14 @@ public final class LauncherSettingsActivity extends Activity {
         remapSonyLivChoice.setOnClickListener(v -> showAppPicker("remap_sonyliv", R.string.remap_sonyliv_label));
         remapLiveTvChoice = findViewById(R.id.remapLiveTvChoice);
         remapLiveTvChoice.setOnClickListener(v -> showAppPicker("remap_livetv", R.string.remap_livetv_label));
+        recentAppsTrigger = choices.getInt("recent_apps_trigger", 0);
+        recentAppsTriggerChoice = findViewById(R.id.recentAppsTriggerChoice);
+        recentAppsTriggerChoice.setOnClickListener(v -> {
+            recentAppsTrigger = (recentAppsTrigger + 1) % 5;
+            choices.edit().putInt("recent_apps_trigger", recentAppsTrigger).apply();
+            changed();
+            refresh();
+        });
         followThemeChoice = findViewById(R.id.followThemeChoice);
         followThemeChoice.setOnClickListener(v -> {
             if (!hasOnTvChoices()) return;
@@ -344,7 +370,8 @@ public final class LauncherSettingsActivity extends Activity {
                     .remove("settings_key_panel").remove("tile_menu").remove("turbo_motion").remove("clock_style").remove("oled_mode").remove("screen_blanker").remove("double_home_saver")
                     .remove("home_idle_clock_minutes")
                     .remove("remap_netflix").remove("remap_prime")
-                    .remove("remap_hotstar").remove("remap_sonyliv").remove("remap_livetv").commit();
+                    .remove("remap_hotstar").remove("remap_sonyliv").remove("remap_livetv")
+                    .remove("recent_apps_trigger").commit();
             Config current = Config.load(this);
             columns = current.columns;
             rowsBelowDock = current.rowsBelowDock;
@@ -637,6 +664,7 @@ public final class LauncherSettingsActivity extends Activity {
                 getString(doubleHomeSaver ? R.string.on : R.string.off)));
         adaptiveWallpaperChoice.setText(getString(R.string.adaptive_wallpaper_state,
                 getString(adaptiveWallpaper ? R.string.on : R.string.off)));
+        panelOpacityChoice.setText(getString(R.string.panel_opacity_state, panelOpacity + "%"));
         remapNetflixChoice.setText(getString(R.string.remap_netflix_format,
                 getAppLabel(choices.getString("remap_netflix", null))));
         remapPrimeChoice.setText(getString(R.string.remap_prime_format,
@@ -647,6 +675,15 @@ public final class LauncherSettingsActivity extends Activity {
                 getAppLabel(choices.getString("remap_sonyliv", null))));
         remapLiveTvChoice.setText(getString(R.string.remap_livetv_format,
                 getAppLabel(choices.getString("remap_livetv", null))));
+        String triggerName;
+        switch (recentAppsTrigger) {
+            case 1: triggerName = getString(R.string.recent_trigger_hold_home); break;
+            case 2: triggerName = getString(R.string.recent_trigger_livetv); break;
+            case 3: triggerName = getString(R.string.recent_trigger_menu); break;
+            case 4: triggerName = getString(R.string.recent_trigger_guide); break;
+            default: triggerName = getString(R.string.recent_trigger_patchwall); break;
+        }
+        recentAppsTriggerChoice.setText(getString(R.string.recent_apps_trigger_state, triggerName));
         String wallpaperCurrent = choices.getString(Config.WALLPAPER_CHOICE_KEY, null);
         wallpaperChoice.setText(getString(R.string.wallpaper_state,
                 "none".equals(wallpaperCurrent) ? getString(R.string.wallpaper_none)
@@ -666,9 +703,10 @@ public final class LauncherSettingsActivity extends Activity {
                 || choices.contains("cinematic_home") || choices.contains("fade_rows")
                 || choices.contains("settings_key_panel") 
                 || choices.contains("tile_menu") || choices.contains("turbo_motion") || choices.contains("clock_style") || choices.contains("oled_mode") || choices.contains("screen_blanker") || choices.contains("double_home_saver") || choices.contains("home_idle_clock_minutes")
+                || choices.contains("adaptive_wallpaper") || choices.contains("panel_opacity")
                 || choices.contains("remap_netflix") || choices.contains("remap_prime")
                 || choices.contains("remap_hotstar") || choices.contains("remap_sonyliv")
-                || choices.contains("remap_livetv");
+                || choices.contains("remap_livetv") || choices.contains("recent_apps_trigger");
     }
 
     private void open(Intent intent) {
@@ -677,5 +715,10 @@ public final class LauncherSettingsActivity extends Activity {
         } catch (ActivityNotFoundException | SecurityException e) {
             Toast.makeText(this, R.string.not_available, Toast.LENGTH_LONG).show();
         }
+    }
+
+    static int getScrimColor(int percent) {
+        int alpha = Math.max(0, Math.min(255, (percent * 255) / 100));
+        return (alpha << 24) | 0x080C14;
     }
 }
